@@ -44,48 +44,51 @@
       neovim-nightly = neovim.defaultPackage.${final.system};
       neovimPlugins = lib.mkNeovimPlugins { inherit inputs plugins; pkgs = final;};
     };
-  } // utils.lib.eachDefaultSystem (system: let 
+  } // utils.lib.eachDefaultSystem (system: let
     pkgs = import nixpkgs { inherit system; overlays = [self.overlay]; };
+    mkNeovim = config: lib.mkNeovim { inherit pkgs config; };
   in rec {
     packages = {
-      neovimPlugins = pkgs.neovimPlugins;
-      neovimBase = lib.mkNeovim {
-        inherit pkgs;
-        config.vim = {
-          gruvbox.enable = true;
-        };
+      neovimBase = mkNeovim {
+        gruvbox.enable = true;
       };
-      neovimFull = lib.mkNeovim {
-        inherit pkgs;
-        config.vim = {
-          gruvbox.enable = true;
-          lsp = {
-            enable = true;
-            lightbulb = true;
-            languages = {
-              bash       = true;
-              clang      = true;
-              css        = true;
-              docker     = true;
-              html       = true;
-              json       = true;
-              nix        = true;
-              python     = true;
-              tex        = true;
-              typescript = true;
-              vimscript  = true;
-              yaml       = true;
-            };
+      neovimFull = mkNeovim {
+        gruvbox.enable = true;
+        lsp = {
+          enable = true;
+          lightbulb = true;
+          languages = {
+            bash       = true;
+            clang      = true;
+            css        = true;
+            docker     = true;
+            html       = true;
+            json       = true;
+            nix        = true;
+            python     = true;
+            tex        = true;
+            typescript = true;
+            vimscript  = true;
+            yaml       = true;
           };
+        };
+        languages = {
+          latex.enable = true;
         };
       };
     };
 
     defaultPackage = packages.neovimFull;
 
+    lib = { inherit mkNeovim; };
+
     defaultApp = {
       type = "app";
       program = "${packages.neovimFull}/bin/nvim";
+    };
+
+    devShell = pkgs.mkShell {
+      nativeBuildInputs = with pkgs; [ packages.neovimFull ];
     };
   });
 }

@@ -8,22 +8,22 @@ rec {
     };
   in builtins.listToAttrs (map (name: { inherit name; value = buildPlug name; }) plugins);
 
-  mkNeovim = {pkgs, config, ...}: let
+  mkNeovim = { pkgs, config, ... }: let
     neovimPlugins = pkgs.neovimPlugins;
     vimOptions = pkgs.lib.evalModules {
       modules = [ { imports = [ ./modules ]; } config ];
       specialArgs = { inherit pkgs; };
     };
-    vim = vimOptions.config.vim;
+    cfg = vimOptions.config;
   in pkgs.wrapNeovim pkgs.neovim-nightly {
     viAlias = true;
     vimAlias = true;
     configure = {
-      customRC = vim.configRC;
+      customRC = cfg.configRC;
 
       packages.myVimPackage = with pkgs.vimPlugins; {
-        start = vim.startPlugins;
-        opt   = vim.optPlugins;
+        start = cfg.startPlugins;
+        opt   = cfg.optPlugins;
       };
     };
   };

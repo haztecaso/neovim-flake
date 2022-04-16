@@ -1,9 +1,9 @@
 { config, lib, pkgs, ... }:
 let
-  cfg = config.vim.lsp;
+  cfg = config.lsp;
   filterNonNull = builtins.filter (x: x != null);
 in {
-  options.vim.lsp = with lib; {
+  options.lsp = with lib; {
     enable = mkEnableOption "Wether to enable LSP support";
     lightbulb = mkEnableOption "Enable Light Bulb";
 
@@ -26,7 +26,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    vim.startPlugins = with pkgs.neovimPlugins; filterNonNull [ 
+    startPlugins = with pkgs.neovimPlugins; filterNonNull [ 
       completion-nvim 
       nvim-lspconfig 
       nvim-treesitter
@@ -34,7 +34,7 @@ in {
       (if cfg.lightbulb then pkgs.neovimPlugins.nvim-lightbulb else null)
       (if cfg.languages.nix then vim-nix else null)
     ];
-    vim.configRC = ''
+    configRC = ''
       " Use <Tab> and <S-Tab> to navigate through popup menu
       inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
       inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -46,11 +46,11 @@ in {
       set foldlevel=10
       set foldexpr=nvim_treesitter#foldexpr()
     '';
-    vim.globals = {
+    globals = {
       completion_enable_auto_popup = 2;
     };
 
-    vim.nnoremap = {
+    nnoremap = {
       "K" = "<cmd>lua vim.lsp.buf.hover()<CR>";
       "gD" = "<cmd>lua vim.lsp.buf.declaration()<CR>";
       "gd" = "<cmd>lua vim.lsp.buf.definition()<CR>";
@@ -64,7 +64,7 @@ in {
 
 
     };
-    vim.luaConfigRC = ''
+    luaConfigRC = ''
       local wk = require("which-key")
       wk.register({
         K = {"Code hover"},

@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  cfg = config.vim;
+  cfg = config;
   wrapLuaConfig = luaConfig: ''
     lua << EOF
     ${luaConfig}
@@ -11,7 +11,7 @@ let
     type = with lib.types; attrsOf (nullOr str);
   } // it);
 in {
-  options.vim = with lib; {
+  options = with lib; {
     commonConfig = mkOption {
       description = "Common config";
       type = types.lines;
@@ -82,9 +82,9 @@ in {
       let groups = matchCtrl it; in if groups == null then it else "<C-${lib.toUpper (lib.head groups)}>${lib.head (lib.tail groups)}";
       mapVimBinding = prefix: mappings: lib.mapAttrsFlatten (name: value: "${prefix} ${mapKeybinding name} ${value}") (filterNonNull mappings);
 
-    nnoremap = mapVimBinding "nnoremap" config.vim.nnoremap;
+    nnoremap = mapVimBinding "nnoremap" config.nnoremap;
   in {
-    vim.configRC = ''
+    configRC = ''
       let mapleader = "${cfg.leader}"
       let maplocalleader = "${cfg.localleader}"
       ${cfg.commonConfig}
