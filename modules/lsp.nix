@@ -15,7 +15,7 @@ in
       docker = mkEnableOption "Enable docker support";
       html = mkEnableOption "Enable html support";
       json = mkEnableOption "Enable JSON";
-      lean = mkEnableOption "Enable lean support";
+      lean = mkEnableOption "Enable lean support. NOT WORKING."; #TODO: Fix
       nix = mkEnableOption "Enable NIX Language support";
       python = mkEnableOption "Enable lsp python support";
       tex = mkEnableOption "Enable tex support";
@@ -32,6 +32,7 @@ in
       nvim-treesitter-context
       (if cfg.lightbulb then nvim-lightbulb else null)
       (if cfg.languages.nix then vim-nix else null)
+      # (if cfg.languages.lean then lean-nvim else null)
       (if config.completion.enable then cmp-nvim-lsp else null)
     ];
 
@@ -179,11 +180,17 @@ in
       '' else ""}
 
       ${if cfg.languages.lean then ''
-        lspconfig.lean.setup{
-          ${if config.completion.enable then "capabilities = capabilities;" else ""}
-          cmd = {'${pkgs.lean-language-server}/bin/lean-language-server', '--stdio' };
-          filetypes = { "lean" }; 
-        }
+       -- require('lean').setup {
+       --     abbreviations = { builtin = true },
+       --     lsp = { on_attach = on_attach },
+       --     lsp3 = { cmd = { '${pkgs.lean-language-server}/bin/lean-language-server' } },
+       --     mappings = true,
+       -- }
+       -- lspconfig.leanls.setup{
+       --   ${if config.completion.enable then "capabilities = capabilities;" else ""}
+       --   cmd = { '${pkgs.lean-language-server}/bin/lean-language-server' },
+       --   filetypes = { "lean" }; 
+       -- }
       '' else ""}
 
       ${if cfg.languages.nix then ''
