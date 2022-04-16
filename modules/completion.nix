@@ -39,11 +39,11 @@ in
       		  ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
       		},
       		sources = {
-      		  { name = 'nvim_lsp' },
       		  { name = 'vsnip' },
+      		  { name = 'nvim_lsp' },
       		  { name = 'path' },
       		  { name = 'buffer' },
-                { name = 'latex_symbols' },
+              { name = 'latex_symbols' },
       		},
               experimental = { native_menu = true, },
       	  }
