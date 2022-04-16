@@ -10,7 +10,7 @@ rec {
     in
     builtins.listToAttrs (map (name: { inherit name; value = buildPlug name; }) plugins);
 
-  mkNeovim = { pkgs, config, ... }:
+  mkNeovim = { pkgs, config ? { }, ... }:
     let
       neovimPlugins = pkgs.neovimPlugins;
       vimOptions = pkgs.lib.evalModules {
