@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-cfg = config.base;
+  cfg = config.base;
 in
 {
   options.base = with lib; {
@@ -15,7 +15,7 @@ in
   };
   config = {
     base = with lib; {
-      disableArrows = mkDefault false; 
+      disableArrows = mkDefault false;
     };
 
     startPlugins = with pkgs.vimPlugins; with pkgs.neovimPlugins; [

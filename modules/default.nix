@@ -10,7 +10,8 @@ let
     default = { };
     type = with lib.types; attrsOf (nullOr str);
   } // it);
-in {
+in
+{
   options = with lib; {
     commonConfig = mkOption {
       description = "Common config";
@@ -51,11 +52,11 @@ in {
     optPlugins = mkOption {
       description = "List of plugins to optionally load";
       default = [ ];
-      type =  with types; listOf package;
+      type = with types; listOf package;
     };
 
     globals = mkOption {
-      default = {};
+      default = { };
       description = "Set containing global variable values";
       type = types.attrs;
     };
@@ -75,25 +76,27 @@ in {
     ./snippets.nix
   ];
 
-  config = let
-    filterNonNull = mappings: lib.filterAttrs (name: value: value != null) mappings;
-    globalsScript = lib.mapAttrsFlatten(name: value: "let g:${name}=${builtins.toJSON value}") (filterNonNull cfg.globals);
+  config =
+    let
+      filterNonNull = mappings: lib.filterAttrs (name: value: value != null) mappings;
+      globalsScript = lib.mapAttrsFlatten (name: value: "let g:${name}=${builtins.toJSON value}") (filterNonNull cfg.globals);
 
-    matchCtrl = it: builtins.match "Ctrl-(.)(.*)" it;
-    mapKeybinding = it:
-      let groups = matchCtrl it; in if groups == null then it else "<C-${lib.toUpper (lib.head groups)}>${lib.head (lib.tail groups)}";
+      matchCtrl = it: builtins.match "Ctrl-(.)(.*)" it;
+      mapKeybinding = it:
+        let groups = matchCtrl it; in if groups == null then it else "<C-${lib.toUpper (lib.head groups)}>${lib.head (lib.tail groups)}";
       mapVimBinding = prefix: mappings: lib.mapAttrsFlatten (name: value: "${prefix} ${mapKeybinding name} ${value}") (filterNonNull mappings);
 
-    nnoremap = mapVimBinding "nnoremap" config.nnoremap;
-  in {
-    configRC = ''
-      let mapleader = "${cfg.leader}"
-      let maplocalleader = "${cfg.localleader}"
-      ${cfg.commonConfig}
-      ${wrapLuaConfig cfg.luaConfigRC}
-      ${lib.concatStringsSep "\n" nnoremap}
-      ${lib.concatStringsSep "\n" globalsScript}
-    '';
-  };
+      nnoremap = mapVimBinding "nnoremap" config.nnoremap;
+    in
+    {
+      configRC = ''
+        let mapleader = "${cfg.leader}"
+        let maplocalleader = "${cfg.localleader}"
+        ${cfg.commonConfig}
+        ${wrapLuaConfig cfg.luaConfigRC}
+        ${lib.concatStringsSep "\n" nnoremap}
+        ${lib.concatStringsSep "\n" globalsScript}
+      '';
+    };
 
 }

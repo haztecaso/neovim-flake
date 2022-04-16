@@ -2,7 +2,8 @@
 let
   cfg = config.lsp;
   filterNonNull = builtins.filter (x: x != null);
-in {
+in
+{
   options.lsp = with lib; {
     enable = mkEnableOption "Wether to enable LSP support";
     lightbulb = mkEnableOption "Enable Light Bulb";
@@ -26,8 +27,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    startPlugins = with pkgs.vimPlugins; filterNonNull [ 
-      nvim-lspconfig 
+    startPlugins = with pkgs.vimPlugins; filterNonNull [
+      nvim-lspconfig
       nvim-treesitter
       nvim-treesitter-context
       (if cfg.lightbulb then nvim-lightbulb else null)
@@ -46,15 +47,15 @@ in {
     '';
 
     nnoremap = {
-      "K"          = "<cmd>lua vim.lsp.buf.hover()<CR>";
-      "gD"         = "<cmd>lua vim.lsp.buf.declaration()<CR>";
-      "gd"         = "<cmd>lua vim.lsp.buf.definition()<CR>";
-      "gi"         = "<cmd>lua vim.lsp.buf.implementation()<CR>";
+      "K" = "<cmd>lua vim.lsp.buf.hover()<CR>";
+      "gD" = "<cmd>lua vim.lsp.buf.declaration()<CR>";
+      "gd" = "<cmd>lua vim.lsp.buf.definition()<CR>";
+      "gi" = "<cmd>lua vim.lsp.buf.implementation()<CR>";
       "<leader>ca" = "<cmd>lua vim.lsp.buf.code_action()<cr>";
       "<leader>rn" = "<cmd>lua vim.lsp.buf.rename()<cr>";
-      "<leader>f"  = "<cmd>lua vim.lsp.buf.formatting()<CR>";
-      "<leader>k"  = "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>";
-      "<leader>j"  = "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>";
+      "<leader>f" = "<cmd>lua vim.lsp.buf.formatting()<CR>";
+      "<leader>k" = "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>";
+      "<leader>j" = "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>";
     };
 
     luaConfigRC = ''
