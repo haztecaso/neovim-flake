@@ -69,7 +69,7 @@
               docker     = true;
               html       = true;
               json       = true;
-              # nix        = true;
+              nix        = true;
               python     = true;
               tex        = true;
               typescript = true;

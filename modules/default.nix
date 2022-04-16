@@ -15,7 +15,7 @@ in {
     commonConfig = mkOption {
       description = "Common config";
       type = types.lines;
-      default = builtins.readFile ./common.vim;
+      default = builtins.readFile ../common.vim;
     };
 
     configRC = mkOption {
@@ -70,6 +70,7 @@ in {
     ./gruvbox.nix
     ./base.nix
     ./lsp.nix
+    ./latex.nix
   ];
 
   config = let
@@ -86,6 +87,7 @@ in {
     vim.configRC = ''
       let mapleader = "${cfg.leader}"
       let maplocalleader = "${cfg.localleader}"
+      ${cfg.commonConfig}
       ${wrapLuaConfig cfg.luaConfigRC}
       ${lib.concatStringsSep "\n" nnoremap}
       ${lib.concatStringsSep "\n" globalsScript}
