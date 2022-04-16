@@ -35,6 +35,7 @@
         neovimPlugins = lib.mkNeovimPlugins { inherit inputs plugins; pkgs = final; };
         neovimBase = lib.mkNeovim { pkgs = final; config = profiles.base; };
         neovimFull = lib.mkNeovim { pkgs = final; config = profiles.full; };
+        lean-language-server = final.callPackage ./lean-language-server {};
       };
     } // utils.lib.eachDefaultSystem (system:
       let
@@ -58,7 +59,7 @@
         };
 
         devShell = pkgs.mkShell {
-          nativeBuildInputs = with pkgs; [ packages.neovimFull ];
+          nativeBuildInputs = with pkgs; [ packages.neovimFull nodePackages.node2nix ];
         };
       });
 }

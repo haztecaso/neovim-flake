@@ -14,6 +14,7 @@
         docker = true;
         html = true;
         json = true;
+        lean = true;
         nix = true;
         python = true;
         tex = true;

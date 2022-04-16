@@ -9,20 +9,19 @@ in
     lightbulb = mkEnableOption "Enable Light Bulb";
 
     languages = {
-
-      bash = mkEnableOption "Enable Bash Language Support";
+      bash = mkEnableOption "Enable Bash Language support";
       clang = mkEnableOption "Enable C/C++ with clang";
       css = mkEnableOption "Enable css support";
       docker = mkEnableOption "Enable docker support";
       html = mkEnableOption "Enable html support";
       json = mkEnableOption "Enable JSON";
-      nix = mkEnableOption "Enable NIX Language Support";
+      lean = mkEnableOption "Enable lean support";
+      nix = mkEnableOption "Enable NIX Language support";
       python = mkEnableOption "Enable lsp python support";
       tex = mkEnableOption "Enable tex support";
-      typescript = mkEnableOption "Enable Typescript/Javascript Support";
+      typescript = mkEnableOption "Enable Typescript/Javascript support";
       vimscript = mkEnableOption "Enable lsp vimscript support";
       yaml = mkEnableOption "Enable yaml support";
-
     };
   };
 
@@ -175,7 +174,15 @@ in
         lspconfig.jsonls.setup{
           ${if config.completion.enable then "capabilities = capabilities;" else ""}
           cmd = {'${pkgs.nodePackages.vscode-json-languageserver-bin}/bin/json-languageserver', '--stdio' };
-          filetypes = { "html", "css", "javascript" }; 
+          filetypes = { "json", "html", "css", "javascript" }; 
+        }
+      '' else ""}
+
+      ${if cfg.languages.lean then ''
+        lspconfig.lean.setup{
+          ${if config.completion.enable then "capabilities = capabilities;" else ""}
+          cmd = {'${pkgs.lean-language-server}/bin/lean-language-server', '--stdio' };
+          filetypes = { "lean" }; 
         }
       '' else ""}
 
