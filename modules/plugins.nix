@@ -41,6 +41,7 @@ let
         "vimtex_quickfix_open_on_warning" = "0";
       };
     };
+    nix.startPlugins = [ pkgs.vimPlugins.vim-nix ];
     nvim-which-key.startPlugins = [ pkgs.neovimPlugins.nvim-which-key ];
     vinegar.startPlugins = [ pkgs.vimPlugins.vim-vinegar ];
   };
@@ -60,6 +61,7 @@ in
       git = mkBoolOption "Enable git support.";
       lastplace = mkBoolOption "Enable vim-lastplace.";
       latex = mkBoolOption "Enable latex support.";
+      nix = mkBoolOption "Enable vim-nix.";
       nvim-which-key = mkBoolOption "Enable nvim-which-key.";
       vinegar = mkBoolOption "Enable vim-vinegar.";
     };
@@ -73,6 +75,7 @@ in
         git = mkDefault true;
         lastplace = mkDefault true;
         latex = mkDefault true;
+        nix = mkDefault true;
         nvim-which-key = mkDefault true;
         vinegar = mkDefault true;
       };

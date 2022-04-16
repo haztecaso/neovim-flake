@@ -31,10 +31,11 @@ in
       nvim-treesitter
       nvim-treesitter-context
       (if cfg.lightbulb then nvim-lightbulb else null)
-      (if cfg.languages.nix then vim-nix else null)
       # (if cfg.languages.lean then lean-nvim else null)
       (if config.completion.enable then cmp-nvim-lsp else null)
     ];
+
+    plugins.nix = if cfg.languages.nix then lib.mkForce true else lib.mkDefault true;
 
     configRC = ''
       " Use <Tab> and <S-Tab> to navigate through popup menu
