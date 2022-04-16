@@ -4,24 +4,15 @@ let
   configs = {
     ack = {
       startPlugins = [ pkgs.vimPlugins.ack-vim ];
-      globals = {
-        "ackprg" = "${pkgs.ag}/bin/ag --vimgrep";
-      };
+      globals.ackprg = "${pkgs.ag}/bin/ag --vimgrep";
     };
     commentary.startPlugins = [ pkgs.vimPlugins.vim-commentary ];
     ctrlp = {
-      startPlugins = with pkgs.vimPlugins; [
-        ctrlp
-      ];
-      globals = {
-        "ctrlp_show_hidden" = "1";
-      };
+      startPlugins = [ pkgs.vimPlugins.ctrlp ];
+      globals."ctrlp_show_hidden" = "1";
     };
     git = {
-      startPlugins = with pkgs.vimPlugins; [
-        vim-fugitive
-        vim-gitgutter
-      ];
+      startPlugins = with pkgs.vimPlugins; [ vim-fugitive vim-gitgutter ];
       globals = {
         "gitgutter_sign_added" = "+";
         "gitgutter_sign_modified" = "~";
@@ -43,7 +34,13 @@ let
     };
     nix.startPlugins = [ pkgs.vimPlugins.vim-nix ];
     nvim-which-key.startPlugins = [ pkgs.neovimPlugins.nvim-which-key ];
-    vinegar.startPlugins = [ pkgs.vimPlugins.vim-vinegar ];
+    vinegar = {
+      startPlugins = [ pkgs.vimPlugins.vim-vinegar ];
+      globals = {
+        "netrw_liststyle" = "3";
+        "netrw_banner" = "0";
+      };
+    };
   };
 in
 {
