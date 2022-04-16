@@ -16,27 +16,16 @@
     };
 
     # Vim plugins
-    completion-nvim = { url = "github:nvim-lua/completion-nvim"; flake = false; };
-    gruvbox = { url = "github:morhetz/gruvbox"; flake = false; };
-    nvim-lightbulb = { url = "github:kosayoda/nvim-lightbulb"; flake = false; };
-    nvim-lspconfig = { url = "github:neovim/nvim-lspconfig"; flake = false; };
-    nvim-treesitter = { url = "github:nvim-treesitter/nvim-treesitter"; flake = false;};
-    nvim-treesitter-context = { url = "github:romgrk/nvim-treesitter-context"; flake = false;};
-    nvim-which-key = { url = "github:folke/which-key.nvim"; flake = false; };
-    vim-nix = { url = "github:LnL7/vim-nix"; flake = false; };
+    nvim-which-key     = { url = "github:folke/which-key.nvim"; flake = false; };
+    cmp-nvim-ultisnips = { url = "github:quangnguyen30192/cmp-nvim-ultisnips"; flake = false; };
+    
   };
 
   outputs = { self, nixpkgs, utils, neovim, ... }@inputs: let
     lib = import ./lib.nix;
     plugins = [
-      "completion-nvim"
-      "gruvbox"
-      "nvim-lightbulb"
-      "nvim-lspconfig"
-      "nvim-treesitter"
-      "nvim-treesitter-context"
       "nvim-which-key"
-      "vim-nix"
+      "cmp-nvim-ultisnips"
     ];
     profiles = import ./profiles.nix;
   in {

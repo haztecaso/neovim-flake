@@ -71,6 +71,7 @@ in {
     ./base.nix
     ./lsp.nix
     ./latex.nix
+    ./completion.nix
   ];
 
   config = let
