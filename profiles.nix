@@ -1,10 +1,7 @@
 {
-  base = {
-    gruvbox.enable = true;
-  };
+  base = { };
 
   full = {
-    gruvbox.enable = true;
     completion.enable = true;
     snippets.enable = true;
     lsp = {

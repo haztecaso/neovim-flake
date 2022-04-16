@@ -3,7 +3,11 @@ let
   cfg = config.gruvbox;
 in
 {
-  options.gruvbox.enable = lib.mkEnableOption "Wether to enable and config gruvbox theme";
+  options.gruvbox.enable = with lib; mkOption {
+    type = types.bool;
+    description = "Wether to enable and config gruvbox theme";
+    default = true;
+  };
 
   config = lib.mkIf cfg.enable {
     startPlugins = with pkgs.vimPlugins; [ gruvbox ];
