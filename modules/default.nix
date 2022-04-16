@@ -67,11 +67,12 @@ in {
   };
 
   imports = [
-    ./gruvbox.nix
     ./base.nix
-    ./lsp.nix
-    ./latex.nix
     ./completion.nix
+    ./gruvbox.nix
+    ./lsp.nix
+    ./plugins.nix
+    ./snippets.nix
   ];
 
   config = let

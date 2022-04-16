@@ -5,6 +5,8 @@
 
   full = {
     gruvbox.enable = true;
+    completion.enable = true;
+    snippets.enable = true;
     lsp = {
       enable = true;
       lightbulb = true;
@@ -22,9 +24,6 @@
         vimscript  = true;
         yaml       = true;
       };
-    };
-    languages = {
-      latex.enable = true;
     };
   };
 }
