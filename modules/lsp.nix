@@ -32,6 +32,7 @@ in {
       nvim-treesitter-context
       (if cfg.lightbulb then nvim-lightbulb else null)
       (if cfg.languages.nix then vim-nix else null)
+      (if config.completion.enable then cmp-nvim-lsp else null)
     ];
 
     configRC = ''
@@ -126,15 +127,21 @@ in {
           }
         }
       '' else ""}
+      
+      ${if config.completion.enable then ''
+        local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+      '' else ""}
 
       ${if cfg.languages.bash then ''
         lspconfig.bashls.setup{
+          ${if config.completion.enable then "capabilities = capabilities;" else ""}
           cmd = {"${pkgs.nodePackages.bash-language-server}/bin/bash-language-server", "start"}
         }
       '' else ""}
 
       ${if cfg.languages.clang then ''
         lspconfig.clangd.setup{
+          ${if config.completion.enable then "capabilities = capabilities;" else ""}
           cmd = {'${pkgs.clang-tools}/bin/clangd', '--background-index'};
           filetypes = { "c", "cpp", "objc", "objcpp" };
         }
@@ -142,6 +149,7 @@ in {
 
       ${if cfg.languages.css then ''
         lspconfig.cssls.setup{
+          ${if config.completion.enable then "capabilities = capabilities;" else ""}
           cmd = {'${pkgs.nodePackages.vscode-css-languageserver-bin}/bin/css-languageserver', '--stdio' };
           filetypes = { "css", "scss", "less" }; 
         }
@@ -149,12 +157,14 @@ in {
 
       ${if cfg.languages.docker then ''
         lspconfig.dockerls.setup{
+          ${if config.completion.enable then "capabilities = capabilities;" else ""}
           cmd = {'${pkgs.nodePackages.dockerfile-language-server-nodejs}/bin/docker-language-server', '--stdio' }
         }
       '' else ""}
 
       ${if cfg.languages.html then ''
         lspconfig.html.setup{
+          ${if config.completion.enable then "capabilities = capabilities;" else ""}
           cmd = {'${pkgs.nodePackages.vscode-html-languageserver-bin}/bin/html-languageserver', '--stdio' };
           filetypes = { "html", "css", "javascript" }; 
         }
@@ -162,6 +172,7 @@ in {
 
       ${if cfg.languages.json then ''
         lspconfig.jsonls.setup{
+          ${if config.completion.enable then "capabilities = capabilities;" else ""}
           cmd = {'${pkgs.nodePackages.vscode-json-languageserver-bin}/bin/json-languageserver', '--stdio' };
           filetypes = { "html", "css", "javascript" }; 
         }
@@ -169,36 +180,42 @@ in {
 
       ${if cfg.languages.nix then ''
         lspconfig.rnix.setup{
+          ${if config.completion.enable then "capabilities = capabilities;" else ""}
           cmd = {"${pkgs.rnix-lsp}/bin/rnix-lsp"}
         }
       '' else ""}
 
       ${if cfg.languages.python then ''
         lspconfig.pyright.setup{
+          ${if config.completion.enable then "capabilities = capabilities;" else ""}
           cmd = {"${pkgs.nodePackages.pyright}/bin/pyright-langserver", "--stdio"}
         }
       '' else ""}
 
       ${if cfg.languages.tex then ''
         lspconfig.texlab.setup{
+          ${if config.completion.enable then "capabilities = capabilities;" else ""}
           cmd = {'${pkgs.texlab}/bin/texlab'}
         }
       '' else ""}
 
       ${if cfg.languages.typescript then ''
         lspconfig.tsserver.setup{
+          ${if config.completion.enable then "capabilities = capabilities;" else ""}
           cmd = {'${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server', '--stdio' }
         }
       '' else ""}
 
       ${if cfg.languages.vimscript then ''
         lspconfig.vimls.setup{
+          ${if config.completion.enable then "capabilities = capabilities;" else ""}
           cmd = {'${pkgs.nodePackages.vim-language-server}/bin/vim-language-server', '--stdio' }
         }
       '' else ""}
 
       ${if cfg.languages.yaml then ''
         lspconfig.vimls.setup{
+          ${if config.completion.enable then "capabilities = capabilities;" else ""}
           cmd = {'${pkgs.nodePackages.yaml-language-server}/bin/yaml-language-server', '--stdio' }
         }
       '' else ""}

@@ -7,9 +7,10 @@ in {
     enable = mkEnableOption "Wether to enable snippets (ultisnips)";
   };
   config = lib.mkIf config.completion.enable {
-    startPlugins = with pkgs; filterNonNull [ 
-      vimPlugins.ultisnips
-      (if cfg.completion.enable then neovimPlugins.cmp-nvim-ultisnips else null)
+    startPlugins = with pkgs.vimPlugins; filterNonNull [ 
+      vim-vsnip
+      (if config.completion.enable then cmp-vsnip else null)
+      vim-snippets
     ];
   };
 }

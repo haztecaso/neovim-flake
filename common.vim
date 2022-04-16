@@ -4,6 +4,8 @@ set textwidth=80
 set ruler
 "set nowrap
 
+set updatetime=100
+
 set expandtab
 set smarttab
 set shiftwidth=4
@@ -33,10 +35,6 @@ set colorcolumn=80
 colorscheme gruvbox
 let g:gruvbox_contrast_dark = "hard"
 set bg=dark
-
-" Maps and remaps
-let mapleader = ","
-let maplocalleader = "."
 
 map <C-j> <C-W>j
 map <C-k> <C-W>k

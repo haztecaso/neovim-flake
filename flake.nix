@@ -17,7 +17,6 @@
 
     # Vim plugins
     nvim-which-key     = { url = "github:folke/which-key.nvim"; flake = false; };
-    cmp-nvim-ultisnips = { url = "github:quangnguyen30192/cmp-nvim-ultisnips"; flake = false; };
     
   };
 
@@ -25,7 +24,6 @@
     lib = import ./lib.nix;
     plugins = [
       "nvim-which-key"
-      "cmp-nvim-ultisnips"
     ];
     profiles = import ./profiles.nix;
   in {
