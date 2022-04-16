@@ -64,7 +64,7 @@ in
       vinegar = mkBoolOption "Enable vim-vinegar.";
     };
 
-  config = lib.mkMerge [
+  config = lib.mkMerge ([
     {
       plugins = with lib; {
         ack = mkDefault true;
@@ -77,5 +77,5 @@ in
         vinegar = mkDefault true;
       };
     }
-  ] ++ (lib.mapAttrsToList (plugin: config: lib.mkIf cfg.${plugin} config) configs);
+  ] ++ (lib.mapAttrsToList (plugin: config: lib.mkIf cfg.${plugin} config) configs));
 }
