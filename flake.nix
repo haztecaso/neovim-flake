@@ -33,6 +33,7 @@
       overlay = final: prev: {
         rnix-lsp = inputs.rnix-lsp.defaultPackage.${final.system};
         neovim-nightly = neovim.defaultPackage.${final.system};
+        mkNeovim = config: mkNeovim { inherit config; pkgs = final; };
         neovimPlugins = mkNeovimPlugins { inherit inputs plugins; pkgs = final; };
         neovimBase = mkNeovim { pkgs = final; };
         neovimFull = mkNeovim {
@@ -75,10 +76,6 @@
         };
 
         defaultPackage = packages.neovimFull;
-
-        lib = {
-          mkNeovim = config: mkNeovim { inherit pkgs config; };
-        };
 
         defaultApp = {
           type = "app";
