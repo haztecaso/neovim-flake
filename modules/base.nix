@@ -180,9 +180,9 @@ in
       "airline_symbols_ascii" = "1";
     };
 
-    vim.nmap = {
+    nmap = {
       "<leader><Space>" = ":nohlsearch<cr>";
-      "<leader>o" = "<C-W>\|<C-W>_";
+      "<leader>o" = "<C-W>\\|<C-W>_";
       "<leader>i" = "<C-W>=";
       "<leader>s" = ":setlocal spell!";
       "<leader>p" = ":setlocal paste!";

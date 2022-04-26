@@ -2,6 +2,8 @@ set textwidth=80
 set ruler
 "set nowrap
 
+set bg=dark
+
 set autochdir
 
 set incsearch

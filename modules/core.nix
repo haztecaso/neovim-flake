@@ -73,23 +73,23 @@ in
         let groups = matchCtrl it; in if groups == null then it else "<C-${lib.toUpper (lib.head groups)}>${lib.head (lib.tail groups)}";
       mapVimBinding = prefix: mappings: lib.mapAttrsFlatten (name: value: "${prefix} ${mapKeybinding name} ${value}") (filterNonNull mappings);
 
-      nnoremap = mapVimBinding "nnoremap" config.vim.nnoremap;
-      inoremap = mapVimBinding "inoremap" config.vim.inoremap;
-      vnoremap = mapVimBinding "vnoremap" config.vim.vnoremap;
-      xnoremap = mapVimBinding "xnoremap" config.vim.xnoremap;
-      snoremap = mapVimBinding "snoremap" config.vim.snoremap;
-      cnoremap = mapVimBinding "cnoremap" config.vim.cnoremap;
-      onoremap = mapVimBinding "onoremap" config.vim.onoremap;
-      tnoremap = mapVimBinding "tnoremap" config.vim.tnoremap;
+      nnoremap = mapVimBinding "nnoremap" cfg.nnoremap;
+      inoremap = mapVimBinding "inoremap" cfg.inoremap;
+      vnoremap = mapVimBinding "vnoremap" cfg.vnoremap;
+      xnoremap = mapVimBinding "xnoremap" cfg.xnoremap;
+      snoremap = mapVimBinding "snoremap" cfg.snoremap;
+      cnoremap = mapVimBinding "cnoremap" cfg.cnoremap;
+      onoremap = mapVimBinding "onoremap" cfg.onoremap;
+      tnoremap = mapVimBinding "tnoremap" cfg.tnoremap;
 
-      nmap = mapVimBinding "nmap" config.vim.nmap;
-      imap = mapVimBinding "imap" config.vim.imap;
-      vmap = mapVimBinding "vmap" config.vim.vmap;
-      xmap = mapVimBinding "xmap" config.vim.xmap;
-      smap = mapVimBinding "smap" config.vim.smap;
-      cmap = mapVimBinding "cmap" config.vim.cmap;
-      omap = mapVimBinding "omap" config.vim.omap;
-      tmap = mapVimBinding "tmap" config.vim.tmap;
+      nmap = mapVimBinding "nmap" cfg.nmap;
+      imap = mapVimBinding "imap" cfg.imap;
+      vmap = mapVimBinding "vmap" cfg.vmap;
+      xmap = mapVimBinding "xmap" cfg.xmap;
+      smap = mapVimBinding "smap" cfg.smap;
+      cmap = mapVimBinding "cmap" cfg.cmap;
+      omap = mapVimBinding "omap" cfg.omap;
+      tmap = mapVimBinding "tmap" cfg.tmap;
 
     in
     {
