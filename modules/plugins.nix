@@ -28,8 +28,8 @@ let
       globals = {
         "tex_flavor" = "latex";
         "vimtex_view_method" = "zathura";
-        "vimtex_quickfix_mode" = "1";
-        "vimtex_quickfix_open_on_warning" = "0";
+        "vimtex_quickfix_mode" = 1;
+        "vimtex_quickfix_open_on_warning" = 0;
       };
     };
     nix.startPlugins = [ pkgs.vimPlugins.vim-nix ];
