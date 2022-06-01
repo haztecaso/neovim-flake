@@ -4,7 +4,7 @@ let
   configs = {
     ack = {
       startPlugins = [ pkgs.vimPlugins.ack-vim ];
-      globals.ackprg = "${pkgs.ag}/bin/ag --vimgrep";
+      globals.ackprg = "${pkgs.silver-searcher}/bin/ag --vimgrep";
     };
     commentary.startPlugins = [ pkgs.vimPlugins.vim-commentary ];
     ctrlp = {
