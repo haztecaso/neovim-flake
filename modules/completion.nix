@@ -45,7 +45,9 @@ in
       		  { name = 'buffer' },
               { name = 'latex_symbols' },
       		},
-              experimental = { native_menu = true, },
+            view = {
+              entries = {name = 'custom', selection_order = 'near_cursor' }
+            },
       	  }
     '';
   };
