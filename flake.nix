@@ -79,11 +79,11 @@
           neovimBase = pkgs.neovimBase;
           neovimFull = pkgs.neovimFull;
           lean-language-server = pkgs.lean-language-server;
+          default = packages.neovimFull;
         };
 
-        defaultPackage = packages.neovimFull;
 
-        defaultApp = {
+        apps.default = {
           type = "app";
           program = "${packages.neovimFull}/bin/nvim";
         };
