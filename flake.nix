@@ -42,32 +42,32 @@
         mkNeovim = config: mkNeovim { inherit config; pkgs = final; };
         neovimPlugins = mkNeovimPlugins { inherit inputs plugins; pkgs = final; };
         neovimBase = mkNeovim { pkgs = final; };
-        neovimFull = mkNeovim {
-          pkgs = final;
-          config = {
-            completion.enable = true;
-            snippets.enable = true;
-            lsp = {
-              enable = true;
-              lightbulb = true;
-              languages = {
-                bash = true;
-                clang = true;
-                css = true;
-                docker = true;
-                html = true;
-                json = true;
-                lean = false;
-                nix = true;
-                python = true;
-                tex = true;
-                typescript = true;
-                vimscript = true;
-                yaml = true;
-              };
-            };
-          };
-        };
+        # neovimFull = mkNeovim {
+        #   pkgs = final;
+        #   config = {
+        #     completion.enable = true;
+        #     snippets.enable = true;
+        #     lsp = {
+        #       enable = true;
+        #       lightbulb = true;
+        #       languages = {
+        #         bash = true;
+        #         clang = true;
+        #         css = true;
+        #         docker = true;
+        #         html = true;
+        #         json = true;
+        #         lean = false;
+        #         nix = true;
+        #         python = true;
+        #         tex = true;
+        #         typescript = true;
+        #         vimscript = true;
+        #         yaml = true;
+        #       };
+        #     };
+        #   };
+        # };
         lean-language-server = (final.callPackage (import ./lean-language-server) { nodejs = final."nodejs-12_x"; }).lean-language-server;
       };
     } // utils.lib.eachDefaultSystem (system:
@@ -77,14 +77,9 @@
       rec {
         packages = {
           neovimBase = pkgs.neovimBase;
-          neovimFull = pkgs.neovimFull;
+          # neovimFull = pkgs.neovimFull;
           lean-language-server = pkgs.lean-language-server;
           default = packages.neovimFull;
-        };
-
-        hydraJobs = {
-          "neovimFull" = pkgs.neovimFull;
-          "neovimBase" = pkgs.neovimBase;
         };
 
 
@@ -96,5 +91,10 @@
         devShell = pkgs.mkShell {
           nativeBuildInputs = with pkgs; [ packages.neovimFull nodePackages.node2nix ];
         };
-      });
+      }) // {
+        hydraJobs = {
+          neovimFull.x86_64-linux = pkgs.neovimFull;
+          neovimBase.x86_64-linu = 	pkgs.neovimBase;
+        };
+      };
 }
