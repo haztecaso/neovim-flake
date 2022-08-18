@@ -96,7 +96,7 @@
         system = "x86_64-linux";
         pkgs = import nixpkgs { inherit system; overlays = [ self.overlay ]; };
       in {
-        # neovimFull.${system} = pkgs.neovimFull;
+        neovimFull.${system} = pkgs.neovimFull;
         neovimBase.${system} = pkgs.neovimBase;
         neovimWebDev.${system} = pkgs.neovimWebDev;
       };
