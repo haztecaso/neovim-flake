@@ -39,7 +39,7 @@
         neovim-nightly = neovim.defaultPackage.${final.system};
         mkNeovim = config: mkNeovim { inherit config; pkgs = final; };
         neovimPlugins = mkNeovimPlugins { inherit inputs plugins; pkgs = final; };
-        neovimBase = mkNeovim { };
+        neovimBase = mkNeovim { pkgs = final; };
         neovimWebDev = mkNeovim {
           pkgs = final;
           config = {
