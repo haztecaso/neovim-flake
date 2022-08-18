@@ -34,41 +34,71 @@
       plugins = [
         "nvim-which-key"
       ];
-    in
-    {
       overlay = final: prev: {
         rnix-lsp = inputs.rnix-lsp.defaultPackage.${final.system};
         neovim-nightly = neovim.defaultPackage.${final.system};
         mkNeovim = config: mkNeovim { inherit config; pkgs = final; };
         neovimPlugins = mkNeovimPlugins { inherit inputs plugins; pkgs = final; };
-        neovimBase = mkNeovim { pkgs = final; };
-        # neovimFull = mkNeovim {
-        #   pkgs = final;
-        #   config = {
-        #     completion.enable = true;
-        #     snippets.enable = true;
-        #     lsp = {
-        #       enable = true;
-        #       lightbulb = true;
-        #       languages = {
-        #         bash = true;
-        #         clang = true;
-        #         css = true;
-        #         docker = true;
-        #         html = true;
-        #         json = true;
-        #         lean = false;
-        #         nix = true;
-        #         python = true;
-        #         tex = true;
-        #         typescript = true;
-        #         vimscript = true;
-        #         yaml = true;
-        #       };
-        #     };
-        #   };
-        # };
+        neovimBase = mkNeovim { };
+        neovimWebDev = mkNeovim {
+          pkgs = final;
+          config = {
+            completion.enable = true;
+            snippets.enable = true;
+            lsp = {
+              enable = true;
+              lightbulb = true;
+              languages = {
+                bash = true;
+                css = true;
+                docker = true;
+                html = true;
+                json = true;
+                python = true;
+                typescript = true;
+                yaml = true;
+              };
+            };
+          };
+        };
+        neovimFull = mkNeovim {
+          pkgs = final;
+          config = {
+            completion.enable = true;
+            snippets.enable = true;
+            lsp = {
+              enable = true;
+              lightbulb = true;
+              languages = {
+                bash = true;
+                clang = true;
+                css = true;
+                docker = true;
+                html = true;
+                json = true;
+                lean = false;
+                nix = true;
+                python = true;
+                tex = true;
+                typescript = true;
+                vimscript = true;
+                yaml = true;
+              };
+            };
+          };
+        };
         lean-language-server = (final.callPackage (import ./lean-language-server) { nodejs = final."nodejs-12_x"; }).lean-language-server;
+      };
+    in
+    {
+      inherit overlay;
+      hydraJobs = let
+        system = "x86_64-linux";
+        pkgs = import nixpkgs { inherit system; overlays = [ self.overlay ]; };
+      in {
+        # neovimFull.${system} = pkgs.neovimFull;
+        neovimBase.${system} = pkgs.neovimBase;
+        neovimBase.${system} = pkgs.neovimWebDev;
       };
     } // utils.lib.eachDefaultSystem (system:
       let
@@ -77,7 +107,8 @@
       rec {
         packages = {
           neovimBase = pkgs.neovimBase;
-          # neovimFull = pkgs.neovimFull;
+          neovimFull = pkgs.neovimFull;
+          neovimWebDev = pkgs.neovimWebDev;
           lean-language-server = pkgs.lean-language-server;
           default = packages.neovimFull;
         };
@@ -92,9 +123,5 @@
           nativeBuildInputs = with pkgs; [ packages.neovimFull nodePackages.node2nix ];
         };
       }) // {
-        hydraJobs = {
-          neovimFull.x86_64-linux = pkgs.neovimFull;
-          neovimBase.x86_64-linu = 	pkgs.neovimBase;
-        };
       };
 }
