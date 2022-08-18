@@ -82,6 +82,11 @@
           default = packages.neovimFull;
         };
 
+        hydraJobs = {
+          "neovimFull" = pkgs.neovimFull;
+          "neovimBase" = pkgs.neovimBase;
+        };
+
 
         apps.default = {
           type = "app";
