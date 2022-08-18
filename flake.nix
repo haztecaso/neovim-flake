@@ -98,7 +98,7 @@
       in {
         # neovimFull.${system} = pkgs.neovimFull;
         neovimBase.${system} = pkgs.neovimBase;
-        neovimBase.${system} = pkgs.neovimWebDev;
+        neovimWebDev.${system} = pkgs.neovimWebDev;
       };
     } // utils.lib.eachDefaultSystem (system:
       let
