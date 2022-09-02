@@ -23,8 +23,8 @@
     "<leader><Space>" = ":nohlsearch<cr>";
     "<leader>o" = "<C-W>\\|<C-W>_";
     "<leader>i" = "<C-W>=";
-    "<leader>s" = ":setlocal spell!";
-    "<leader>p" = ":setlocal paste!";
+    "<leader>s" = ":setlocal spell!<CR>";
+    "<leader>p" = ":setlocal paste!<CR>";
     "<C-n>" = "gt";
     "<C-b>" = "gT";
   };

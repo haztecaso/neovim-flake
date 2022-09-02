@@ -21,6 +21,45 @@ let
         "gitgutter_sign_removed_above_and_below" = "_¯";
         "gitgutter_sign_modified_removed" = "~_";
       };
+      configRC = ''
+		function FugitiveToggle() abort
+		  try
+		    exe filter(getwininfo(), "get(v:val['variables'], 'fugitive_status', v:false) != v:false")[0].winnr .. "wincmd c"
+		  catch /E684/
+		    vertical Git
+		    vertical resize 80
+		  endtry
+		endfunction
+
+        " vimdiff current vs git head (fugitive extension) {{{2
+        nnoremap <Leader>gd :Gdiff<cr>
+        " Close any corresponding diff buffer
+        function! MyCloseDiff()
+          if (&diff == 0 || getbufvar('#', '&diff') == 0)
+                \ && (bufname('%') !~ '^fugitive:' && bufname('#') !~ '^fugitive:')
+            echom "Not in diff view."
+            return
+          endif
+        
+          " close current buffer if alternate is not fugitive but current one is
+          if bufname('#') !~ '^fugitive:' && bufname('%') =~ '^fugitive:'
+            if bufwinnr("#") == -1
+              b #
+              bd #
+            else
+              bd
+            endif
+          else
+            bd # 
+          endif
+        endfunction
+      '';
+
+      nmap = {
+        "<leader>gg" = ":call FugitiveToggle()<CR>";
+        "<leader>gd" = ":Gdiff<CR>";
+        "<leader>gD" = ":call MyCloseDiff()<CR>";
+      };
     };
     lastplace.startPlugins = [ pkgs.vimPlugins.vim-lastplace ];
     latex = {
