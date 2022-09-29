@@ -10,6 +10,7 @@ let
     ctrlp = {
       startPlugins = [ pkgs.vimPlugins.ctrlp ];
       globals."ctrlp_show_hidden" = "1";
+      globals."ctrlp_custom_ignore" = ".git\|node_modules";
     };
     git = {
       startPlugins = with pkgs.vimPlugins; [ vim-fugitive vim-gitgutter ];
