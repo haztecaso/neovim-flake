@@ -82,6 +82,9 @@ let
         "netrw_banner" = "0";
       };
     };
+    vim-visual-multi = {
+      startPlugins = [ pkgs.vimPlugins.vim-visual-multi ];
+    };
   };
 in
 {
@@ -102,6 +105,7 @@ in
       nix = mkBoolOption "Enable vim-nix.";
       nvim-which-key = mkBoolOption "Enable nvim-which-key.";
       vinegar = mkBoolOption "Enable vim-vinegar.";
+      vim-visual-multi = mkBoolOption "Enable vim-visual-multi.";
     };
 
   config = lib.mkMerge ([
@@ -116,6 +120,7 @@ in
         nix = mkDefault true;
         nvim-which-key = mkDefault true;
         vinegar = mkDefault true;
+        vim-visual-multi = mkDefault true;
       };
     }
   ] ++ (lib.mapAttrsToList (plugin: config: lib.mkIf cfg.${plugin} config) configs));
