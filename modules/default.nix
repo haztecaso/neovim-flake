@@ -8,6 +8,7 @@
     ./lsp.nix
     ./plugins.nix
     ./snippets.nix
+    ./telescope.nix
   ];
 
   startPlugins = with pkgs.vimPlugins; with pkgs.neovimPlugins; [
