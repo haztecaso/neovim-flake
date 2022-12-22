@@ -62,6 +62,22 @@
         "type": "github"
       }
     },
+    "nvim-neoclip": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1665642610,
+        "narHash": "sha256-71rPSi399WnHOebIQJnhjBzLRpi8n0EpXckjrmCOvKc=",
+        "owner": "AckslD",
+        "repo": "nvim-neoclip.lua",
+        "rev": "3e0b9a134838c7356d743f84a272c92410c47d8d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "AckslD",
+        "repo": "nvim-neoclip.lua",
+        "type": "github"
+      }
+    },
     "nvim-which-key": {
       "flake": false,
       "locked": {
@@ -106,9 +122,27 @@
       "inputs": {
         "neovim": "neovim",
         "nixpkgs": "nixpkgs",
+        "nvim-neoclip": "nvim-neoclip",
         "nvim-which-key": "nvim-which-key",
         "rnix-lsp": "rnix-lsp",
+        "telescope-repo": "telescope-repo",
         "utils": "utils"
+      }
+    },
+    "telescope-repo": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1666651204,
+        "narHash": "sha256-jGME+CxReCjmd4YQkUMJMf3eN10GivDoVW1cuVodfK8=",
+        "owner": "cljoly",
+        "repo": "telescope-repo.nvim",
+        "rev": "92598143f8c4cadb47f5aef3f7775932827df8f2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cljoly",
+        "repo": "telescope-repo.nvim",
+        "type": "github"
       }
     },
     "utils": {

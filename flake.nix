@@ -23,6 +23,8 @@
 
     # Vim plugins
     nvim-which-key = { url = "github:folke/which-key.nvim"; flake = false; };
+    nvim-neoclip = { url = "github:AckslD/nvim-neoclip.lua"; flake = false; };
+    telescope-repo = { url = "github:cljoly/telescope-repo.nvim"; flake = false; };
 
   };
 
@@ -30,33 +32,35 @@
     let
       lib = import ./lib.nix;
       mkNeovim = lib.mkNeovim;
-      mkNeovimPlugins = lib.mkNeovimPlugins;
       plugins = [
         "nvim-which-key"
+        "nvim-neoclip"
+        "telescope-repo"
       ];
       overlay = final: prev: {
         rnix-lsp = inputs.rnix-lsp.defaultPackage.${final.system};
         neovim-nightly = neovim.defaultPackage.${final.system};
         mkNeovim = config: mkNeovim { inherit config; pkgs = final; };
-        neovimPlugins = mkNeovimPlugins { inherit inputs plugins; pkgs = final; };
+        neovimPlugins = lib.mkNeovimPlugins { inherit inputs plugins; pkgs = final; };
         neovimBase = mkNeovim { pkgs = final; };
         neovimWebDev = mkNeovim {
           pkgs = final;
           config = {
             completion.enable = true;
-            snippets.enable = true;
+            snippets.enable   = true;
+            telescope.emable  = true;
             lsp = {
-              enable = true;
+              enable    = true;
               lightbulb = true;
               languages = {
-                bash = true;
-                css = true;
-                docker = true;
-                html = true;
-                json = true;
-                python = true;
+                bash       = true;
+                css        = true;
+                docker     = true;
+                html       = true;
+                json       = true;
+                python     = true;
                 typescript = true;
-                yaml = true;
+                yaml       = true;
               };
             };
           };
@@ -65,24 +69,25 @@
           pkgs = final;
           config = {
             completion.enable = true;
-            snippets.enable = true;
+            snippets.enable   = true;
+            telescope.enable  = true;
             lsp = {
-              enable = true;
+              enable    = true;
               lightbulb = true;
               languages = {
-                bash = true;
-                clang = true;
-                css = true;
-                docker = true;
-                html = true;
-                json = true;
-                lean = false;
-                nix = true;
-                python = true;
-                tex = true;
+                bash       = true;
+                clang      = true;
+                css        = true;
+                docker     = true;
+                html       = true;
+                json       = true;
+                lean       = false;
+                nix        = true;
+                python     = true;
+                tex        = true;
                 typescript = true;
-                vimscript = true;
-                yaml = true;
+                vimscript  = true;
+                yaml       = true;
               };
             };
           };

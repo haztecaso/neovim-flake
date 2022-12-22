@@ -26,8 +26,8 @@
     "<leader>i" = "<C-W>=";
     "<leader>s" = ":setlocal spell!<CR>";
     "<leader>p" = ":setlocal paste!<CR>";
-    "<C-n>" = "gt";
-    "<C-b>" = "gT";
+    # "<C-n>" = "gt";
+    # "<C-b>" = "gT";
   };
 
 }
