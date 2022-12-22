@@ -118,7 +118,6 @@
           default = packages.neovimFull;
         };
 
-
         apps.default = {
           type = "app";
           program = "${packages.neovimFull}/bin/nvim";
