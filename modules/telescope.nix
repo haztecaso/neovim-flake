@@ -17,18 +17,20 @@ in
     plugins.ctrlp = false;
     luaConfigRC = ''
       require'telescope'.load_extension'neoclip'
+      -- TODO: Instalar binario fd
       require'telescope'.load_extension'repo'
       require'telescope'.load_extension'fzf'
 
       local telescope_builtins = require('telescope.builtin')
       local telescope_extensions = require('telescope').extensions
 
+      -- TODO: Instalar binario repgrip
       vim.keymap.set('n', '<C-f>', telescope_builtins.live_grep, {}) 
       vim.keymap.set('n', '<C-b>', telescope_builtins.buffers, {}) 
       vim.keymap.set('n', '<C-p>', telescope_builtins.git_files, {}) 
       vim.keymap.set('n', '<C-b>', telescope_builtins.buffers, {}) 
       vim.keymap.set('n', '<C-y>', telescope_extensions.neoclip.default, {}) 
-      -- vim.keymap.set('n', '<leader>p', telescope_builtins.find_files, {}) 
+      vim.keymap.set('n', '<M-p>', telescope_builtins.find_files, {}) 
       vim.keymap.set('n', '<M-r>', telescope_builtins.command_history, {}) 
       vim.keymap.set('n', '<C-e>', telescope_builtins.diagnostics, {}) 
 
@@ -56,13 +58,6 @@ in
               width_padding = 0.05,
               height_padding = 1,
               preview_height = 0.5,
-            },
-          },
-          extensions = { 
-            repo = {
-              list = {
-                bin = "${pkgs.fd}/bin/fd"
-              },
             },
           },
         }
