@@ -92,7 +92,7 @@
             };
           };
         };
-        lean-language-server = (final.callPackage (import ./lean-language-server) { nodejs = final."nodejs-12_x"; }).lean-language-server;
+        lean-language-server = (final.callPackage (import ./pkgs/lean-language-server) { nodejs = final."nodejs-18_x"; }).lean-language-server;
       };
     in
     {
@@ -124,7 +124,11 @@
         };
 
         devShell = pkgs.mkShell {
-          nativeBuildInputs = with pkgs; [ packages.neovimFull nodePackages.node2nix ];
+          nativeBuildInputs = with pkgs; [ 
+            packages.neovimFull 
+            nodePackages.node2nix 
+            packages.lean-language-server
+          ];
         };
       }) // {
       };
