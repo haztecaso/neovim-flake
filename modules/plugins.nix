@@ -85,6 +85,15 @@ let
     vim-visual-multi = {
       startPlugins = [ pkgs.vimPlugins.vim-visual-multi ];
     };
+    neoformat = {
+      startPlugins = [ pkgs.vimPlugins.neoformat ];
+      globals = {
+        "neoformat_try_node_exe" = "1";
+      };
+      configRC = ''
+        autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.html,*.md,*.css,*.sass Neoformat
+      '';
+    };
   };
 in
 {
@@ -106,6 +115,7 @@ in
       nvim-which-key = mkBoolOption "Enable nvim-which-key.";
       vinegar = mkBoolOption "Enable vim-vinegar.";
       vim-visual-multi = mkBoolOption "Enable vim-visual-multi.";
+      neoformat = mkBoolOption "Enable neoformat.";
     };
 
   config = lib.mkMerge ([
@@ -121,6 +131,7 @@ in
         nvim-which-key = mkDefault true;
         vinegar = mkDefault true;
         vim-visual-multi = mkDefault true;
+        neoformat = mkDefault true;
       };
     }
   ] ++ (lib.mapAttrsToList (plugin: config: lib.mkIf cfg.${plugin} config) configs));

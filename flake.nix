@@ -21,7 +21,7 @@
       };
     };
 
-    # Vim plugins
+    # Neovim plugins
     nvim-which-key = { url = "github:folke/which-key.nvim"; flake = false; };
     nvim-neoclip = { url = "github:AckslD/nvim-neoclip.lua"; flake = false; };
     telescope-repo = { url = "github:cljoly/telescope-repo.nvim"; flake = false; };
