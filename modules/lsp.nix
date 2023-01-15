@@ -31,7 +31,7 @@ in
       nvim-treesitter
       nvim-treesitter-context
       (if cfg.lightbulb then nvim-lightbulb else null)
-      # (if cfg.languages.lean then lean-nvim else null)
+      (if cfg.languages.lean then lean-nvim else null)
       (if config.completion.enable then cmp-nvim-lsp else null)
     ];
 
@@ -181,17 +181,13 @@ in
       '' else ""}
 
       ${if cfg.languages.lean then ''
-       -- require('lean').setup {
-       --     abbreviations = { builtin = true },
-       --     lsp = { on_attach = on_attach },
-       --     lsp3 = { cmd = { '${pkgs.lean-language-server}/bin/lean-language-server' } },
-       --     mappings = true,
-       -- }
-       -- lspconfig.leanls.setup{
-       --   ${if config.completion.enable then "capabilities = capabilities;" else ""}
-       --   cmd = { '${pkgs.lean-language-server}/bin/lean-language-server' },
-       --   filetypes = { "lean" }; 
-       -- }
+       require('lean').setup {
+           abbreviations = { builtin = true },
+           lsp3 = { cmd = { '${pkgs.lean-language-server}/bin/lean-language-server', '--stdio' } },
+           ft = { default = "lean3" },
+           abbreviations = { leader=','},
+           mappings = true,
+       }
       '' else ""}
 
       ${if cfg.languages.nix then ''
