@@ -183,7 +183,7 @@ in
       ${if cfg.languages.lean then ''
        require('lean').setup {
            abbreviations = { builtin = true },
-           lsp3 = { cmd = { '${pkgs.lean-language-server}/bin/lean-language-server', '--stdio' } },
+           lsp3 = { cmd = { '${pkgs.lean-language-server}/bin/lean-language-server', '--stdio', '-M', '4096' } },
            ft = { default = "lean3" },
            abbreviations = { leader=','},
            mappings = true,
