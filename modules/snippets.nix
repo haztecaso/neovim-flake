@@ -9,13 +9,19 @@ in
   };
   config = lib.mkIf config.completion.enable {
     startPlugins = with pkgs.vimPlugins;  filterNonNull [
-      vim-vsnip
-      vim-vsnip-integ
-      (if config.completion.enable then cmp-vsnip else null)
+      ultisnips
+      (if config.completion.enable then cmp-nvim-ultisnips else null)
       vim-snippets
     ];
     globals = {
-      "vsnip_snippet_dir" = "${../snippets}";
+      "UltiSnipsExpandTrigger" = "<tab>";
+      "UltiSnipsJumpForwardTrigger" = "<tab>";
+      "UltiSnipsJumpBackwardTrigger" = "<s-tab>";
+      "UltiSnipsSnippetDirectories" = [ 
+        "UltiSnips" 
+        "~/src/neovim-flake/snippets/" 
+        "${../snippets}" 
+      ];
     };
   };
 }
