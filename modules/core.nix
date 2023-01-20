@@ -53,7 +53,7 @@ in
     localleader = mkOption {
       description = "nvim maplocalleader";
       type = types.str;
-      default = ";";
+      default = ",";
     };
 
     updatetime = mkOption {
