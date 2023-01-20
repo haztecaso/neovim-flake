@@ -23,15 +23,28 @@ in
     '';
 
     luaConfigRC = ''
-            local cmp = require 'cmp'
+          local cmp = require 'cmp'
+          local cmp_ultisnips_mappings = require 'cmp_nvim_ultisnips.mappings'
 
       	  cmp.setup {
       		snippet = {
       		  expand = function(args)
-      			vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+                vim.fn["UltiSnips#Anon"](args.body)
       		  end,
       		},
       		mapping = {
+              ["<Tab>"] = cmp.mapping(
+                function(fallback)
+                  cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
+                end,
+                { "i", "s", }
+              ),
+              ["<S-Tab>"] = cmp.mapping(
+                function(fallback)
+                  cmp_ultisnips_mappings.jump_backwards(fallback)
+                end,
+                { "i", "s", }
+              ),
       		  ['<C-b>'] = cmp.mapping.scroll_docs(-4),
       		  ['<C-f>'] = cmp.mapping.scroll_docs(4),
       		  ['<C-Space>'] = cmp.mapping.complete(),
@@ -39,7 +52,7 @@ in
       		  ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
       		},
       		sources = {
-      		  { name = 'vsnip' },
+      		  { name = 'ultisnips' },
       		  { name = 'nvim_lsp' },
       		  { name = 'path' },
               { name = 'buffer',

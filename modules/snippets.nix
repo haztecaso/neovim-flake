@@ -14,8 +14,8 @@ in
       vim-snippets
     ];
     globals = {
-      "UltiSnipsExpandTrigger" = "<tab>";
-      "UltiSnipsJumpForwardTrigger" = "<tab>";
+      "UltiSnipsExpandTrigger" = "<c-j>";
+      "UltiSnipsJumpForwardTrigger" = "<c-j>";
       "UltiSnipsJumpBackwardTrigger" = "<s-tab>";
       "UltiSnipsSnippetDirectories" = [ 
         "UltiSnips" 
