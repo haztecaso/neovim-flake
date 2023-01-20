@@ -35,8 +35,29 @@ snippet case "cases" wA
 \end{cases}
 endsnippet
 
+priority 1000
 post_expand "fix_indent(snip)"
 snippet it "Individual item" b
+\item $0
+endsnippet
+
+priority 900
+post_expand "fix_indent(snip)"
+snippet it "Individual item" w
+
+\item $0
+endsnippet
+
+priority 1000
+post_expand "fix_indent(snip)"
+snippet itt "Individual item" bA
+\item $0
+endsnippet
+
+priority 900
+post_expand "fix_indent(snip)"
+snippet itt "Individual item" wA
+
 \item $0
 endsnippet
 
