@@ -12,27 +12,35 @@ endglobal
 
 snippet beg "begin{} / end{}" bA
 \begin{$1}
-	$0
+    $2
 \end{$1}
+
+$0
 endsnippet
 
 snippet enum "Enumerate" bA
 \begin{enumerate}
-	\item $0
+    \item $1
 \end{enumerate}
+
+$0
 endsnippet
 
 snippet item "Itemize" bA
 \begin{itemize}
-	\item $0
+    \item $1
 \end{itemize}
+
+$0
 endsnippet
 
 context "math()"
 snippet case "cases" wA
 \begin{cases}
-	$0
+    $0
 \end{cases}
+
+$0
 endsnippet
 
 priority 1000
