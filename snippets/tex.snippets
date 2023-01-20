@@ -6,6 +6,8 @@ def comment():
 def env(name):
 	[x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
 	return x != '0' and y != '0'
+def fix_indent(snip):
+    vim.eval('feedkeys("\<c-f>")')
 endglobal
 
 snippet beg "begin{} / end{}" bA
@@ -33,8 +35,9 @@ snippet case "cases" wA
 \end{cases}
 endsnippet
 
-snippet itt "item" bA
-	\item $0
+post_expand "fix_indent(snip)"
+snippet it "Individual item" b
+\item $0
 endsnippet
 
 snippet mm "Math" wA
