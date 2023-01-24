@@ -21,11 +21,11 @@
       };
     };
 
-    # Neovim plugins
-    nvim-which-key = { url = "github:folke/which-key.nvim"; flake = false; };
+    # Plugins
     nvim-neoclip = { url = "github:AckslD/nvim-neoclip.lua"; flake = false; };
+    nvim-which-key = { url = "github:folke/which-key.nvim"; flake = false; };
     telescope-repo = { url = "github:cljoly/telescope-repo.nvim"; flake = false; };
-
+    vim-enuch = { url = "github:tpope/vim-eunuch"; flake = false;};
   };
 
   outputs = { self, nixpkgs, utils, neovim, ... }@inputs:
@@ -33,15 +33,16 @@
       lib = import ./lib.nix;
       mkNeovim = lib.mkNeovim;
       plugins = [
-        "nvim-which-key"
         "nvim-neoclip"
+        "nvim-which-key"
         "telescope-repo"
+        "vim-enuch"
       ];
       overlay = final: prev: {
         rnix-lsp = inputs.rnix-lsp.defaultPackage.${final.system};
         neovim-nightly = neovim.defaultPackage.${final.system};
         mkNeovim = config: mkNeovim { inherit config; pkgs = final; };
-        neovimPlugins = lib.mkNeovimPlugins { inherit inputs plugins; pkgs = final; };
+        neovimPlugins = lib.mkPlugins { inherit inputs plugins; pkgs = final; };
         neovimBase = mkNeovim { pkgs = final; };
         neovimWebDev = mkNeovim {
           pkgs = final;

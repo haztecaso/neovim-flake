@@ -7,6 +7,7 @@ let
       globals.ackprg = "${pkgs.silver-searcher}/bin/ag --vimgrep";
     };
     commentary.startPlugins = [ pkgs.vimPlugins.vim-commentary ];
+    enuch.startPlugins = [ pkgs.neovimPlugins.vim-enuch ];
     ctrlp = {
       startPlugins = [ pkgs.vimPlugins.ctrlp ];
       globals."ctrlp_show_hidden" = "1";
@@ -110,14 +111,15 @@ in
       ack = mkBoolOption "Enable ack support.";
       commentary = mkBoolOption "Enable vim-commentary.";
       ctrlp = mkBoolOption "Enable ctrlp plugin.";
+      enuch = mkBoolOption "Enable vim-enuch.";
       git = mkBoolOption "Enable git support.";
       lastplace = mkBoolOption "Enable vim-lastplace.";
       latex = mkBoolOption "Enable latex support.";
+      neoformat = mkBoolOption "Enable neoformat.";
       nix = mkBoolOption "Enable vim-nix.";
       nvim-which-key = mkBoolOption "Enable nvim-which-key.";
-      vinegar = mkBoolOption "Enable vim-vinegar.";
       vim-visual-multi = mkBoolOption "Enable vim-visual-multi.";
-      neoformat = mkBoolOption "Enable neoformat.";
+      vinegar = mkBoolOption "Enable vim-vinegar.";
     };
 
   config = lib.mkMerge ([
@@ -126,6 +128,7 @@ in
         ack = mkDefault true;
         commentary = mkDefault true;
         ctrlp = mkDefault true;
+        enuch = mkDefault true;
         git = mkDefault true;
         lastplace = mkDefault true;
         latex = mkDefault true;

@@ -1,6 +1,6 @@
 with builtins;
 rec {
-  mkNeovimPlugins = { pkgs, inputs, plugins }:
+  mkPlugins = { pkgs, inputs, plugins }:
     let
       buildPlug = name: pkgs.vimUtils.buildVimPluginFrom2Nix {
         pname = name;
