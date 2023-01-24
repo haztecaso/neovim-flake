@@ -8,6 +8,7 @@ let
     };
     commentary.startPlugins = [ pkgs.vimPlugins.vim-commentary ];
     enuch.startPlugins = [ pkgs.neovimPlugins.vim-enuch ];
+    repeat.startPlugins = [ pkgs.vimPlugins.repeat ];
     ctrlp = {
       startPlugins = [ pkgs.vimPlugins.ctrlp ];
       globals."ctrlp_show_hidden" = "1";
@@ -118,6 +119,7 @@ in
       neoformat = mkBoolOption "Enable neoformat.";
       nix = mkBoolOption "Enable vim-nix.";
       nvim-which-key = mkBoolOption "Enable nvim-which-key.";
+      repeat = mkBoolOption "Enable vim-repeat.";
       vim-visual-multi = mkBoolOption "Enable vim-visual-multi.";
       vinegar = mkBoolOption "Enable vim-vinegar.";
     };
@@ -132,11 +134,12 @@ in
         git = mkDefault true;
         lastplace = mkDefault true;
         latex = mkDefault true;
+        neoformat = mkDefault true;
         nix = mkDefault true;
         nvim-which-key = mkDefault true;
-        vinegar = mkDefault true;
+        repeat = mkDefault true;
         vim-visual-multi = mkDefault true;
-        neoformat = mkDefault true;
+        vinegar = mkDefault true;
       };
     }
   ] ++ (lib.mapAttrsToList (plugin: config: lib.mkIf cfg.${plugin} config) configs));
