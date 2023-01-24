@@ -24,7 +24,6 @@ in
       local telescope_builtins = require('telescope.builtin')
       local telescope_extensions = require('telescope').extensions
 
-      -- TODO: Instalar binario repgrip
       vim.keymap.set('n', '<C-f>', telescope_builtins.live_grep, {}) 
       vim.keymap.set('n', '<C-b>', telescope_builtins.buffers, {}) 
       vim.keymap.set('n', '<C-p>', telescope_builtins.git_files, {}) 
@@ -59,6 +58,15 @@ in
               height_padding = 1,
               preview_height = 0.5,
             },
+          },
+          vimgrep_arguments = {
+            "${pkgs.ripgrep}/bin/ripgrep",
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--smart-case"
           },
         }
       }
