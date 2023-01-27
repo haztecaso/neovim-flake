@@ -18,3 +18,4 @@ set wildignore=*.o,*~,*.pyc,*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 set wildmode=longest:full,full
 
 set colorcolumn=80
+set noshowcmd
