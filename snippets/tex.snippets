@@ -34,6 +34,33 @@ snippet item "Itemize" bA
 $0
 endsnippet
 
+snippet TIT "textit" wA
+\textit{${1}}`!p
+if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
+    snip.rv = ' '
+else:
+    snip.rv = ''
+`$2
+endsnippet
+
+snippet TBF "textbf" wA
+\textbf{${1}}`!p
+if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
+    snip.rv = ' '
+else:
+    snip.rv = ''
+`$2
+endsnippet
+
+snippet TTT "texttt" wA
+\texttt{${1}}`!p
+if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
+    snip.rv = ' '
+else:
+    snip.rv = ''
+`$2
+endsnippet
+
 context "math()"
 snippet case "cases" wA
 \begin{cases}
