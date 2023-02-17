@@ -10,7 +10,7 @@ rec {
     in
     builtins.listToAttrs (map (name: { inherit name; value = buildPlug name; }) plugins);
 
-  mkNeovim = { pkgs, config ? { }, ... }:
+  mkNeovimOverrideOptions = { pkgs, config ? { }, ... }:
     let
       neovimPlugins = pkgs.neovimPlugins;
       vimOptions = pkgs.lib.evalModules {
@@ -18,17 +18,19 @@ rec {
         specialArgs = { inherit pkgs; };
       };
       cfg = vimOptions.config;
-    in
-    pkgs.wrapNeovim pkgs.neovim-nightly {
-      viAlias = true;
-      vimAlias = true;
-      configure = {
-        customRC = cfg.configRC;
-
-        packages.myVimPackage = with pkgs.vimPlugins; {
-          start = cfg.startPlugins;
-          opt = cfg.optPlugins;
+    in {
+        viAlias = true;
+        vimAlias = true;
+        configure = {
+          customRC = cfg.configRC;
+          packages.myVimPackage = with pkgs.vimPlugins; {
+            start = cfg.startPlugins;
+            opt = cfg.optPlugins;
+          };
         };
       };
-    };
+
+  mkNeovim = {pkgs, ... }@opts: pkgs.neovim.override (mkNeovimOverrideOptions opts);
+  mkNeovimNightly = {pkgs, ... }@opts: pkgs.wrapNeovim pkgs.neovim-nightly (mkNeovimOverrideOptions opts);
+
 }

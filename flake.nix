@@ -31,7 +31,6 @@
   outputs = { self, nixpkgs, utils, neovim, ... }@inputs:
     let
       lib = import ./lib.nix;
-      mkNeovim = lib.mkNeovim;
       plugins = [
         "nvim-neoclip"
         "nvim-which-key"
@@ -41,10 +40,11 @@
       overlay = final: prev: {
         rnix-lsp = inputs.rnix-lsp.defaultPackage.${final.system};
         neovim-nightly = neovim.defaultPackage.${final.system};
-        mkNeovim = config: mkNeovim { inherit config; pkgs = final; };
+        mkNeovim = config: lib.mkNeovim { inherit config; pkgs = final; };
+        mkNeovimNightly = config: lib.mkNeovimNightly { inherit config; pkgs = final; };
         neovimPlugins = lib.mkPlugins { inherit inputs plugins; pkgs = final; };
-        neovimBase = mkNeovim { pkgs = final; };
-        neovimWebDev = mkNeovim {
+        neovimBase = lib.mkNeovim { pkgs = final; };
+        neovimWebDev = lib.mkNeovim {
           pkgs = final;
           config = {
             completion.enable = true;
@@ -66,7 +66,7 @@
             };
           };
         };
-        neovimFull = mkNeovim {
+        neovimFull = lib.mkNeovim {
           pkgs = final;
           config = {
             completion.enable = true;
