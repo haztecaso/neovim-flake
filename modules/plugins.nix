@@ -86,6 +86,12 @@ let
         "netrw_banner" = "0";
       };
     };
+    tidal = {
+      startPlugins = [ pkgs.vimPlugins.vim-tidal ];
+      globals = {
+        "tidal_target" = "terminal";
+      };
+    };
     vim-visual-multi = {
       startPlugins = [ pkgs.vimPlugins.vim-visual-multi ];
     };
@@ -122,6 +128,7 @@ in
       repeat = mkBoolOption "Enable vim-repeat.";
       vim-visual-multi = mkBoolOption "Enable vim-visual-multi.";
       vinegar = mkBoolOption "Enable vim-vinegar.";
+      tidal = mkBoolOption "Enable vim-tidal.";
     };
 
   config = lib.mkMerge ([
@@ -140,6 +147,7 @@ in
         repeat = mkDefault true;
         vim-visual-multi = mkDefault true;
         vinegar = mkDefault true;
+        tidal = mkDefault false;
       };
     }
   ] ++ (lib.mapAttrsToList (plugin: config: lib.mkIf cfg.${plugin} config) configs));

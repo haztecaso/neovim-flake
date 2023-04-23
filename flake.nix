@@ -21,11 +21,14 @@
       };
     };
 
+    tidal = { url = "github:mitchmindtree/tidalcycles.nix"; };
+
     # Plugins
     nvim-neoclip = { url = "github:AckslD/nvim-neoclip.lua"; flake = false; };
     nvim-which-key = { url = "github:folke/which-key.nvim"; flake = false; };
     telescope-repo = { url = "github:cljoly/telescope-repo.nvim"; flake = false; };
     vim-enuch = { url = "github:tpope/vim-eunuch"; flake = false;};
+    obsidian-nvim = { url = "https://github.com/epwalsh/obsidian.nvim"; flake = false;};
   };
 
   outputs = { self, nixpkgs, utils, neovim, ... }@inputs:
@@ -36,6 +39,7 @@
         "nvim-which-key"
         "telescope-repo"
         "vim-enuch"
+        "obsidian-nvim"
       ];
       overlay = final: prev: {
         rnix-lsp = inputs.rnix-lsp.defaultPackage.${final.system};
@@ -49,7 +53,7 @@
           config = {
             completion.enable = true;
             snippets.enable   = true;
-            telescope.emable  = true;
+            telescope.enable  = true;
             lsp = {
               enable    = true;
               lightbulb = true;
@@ -62,6 +66,7 @@
                 python     = true;
                 typescript = true;
                 yaml       = true;
+                tidal      = true;
               };
             };
           };
@@ -108,7 +113,7 @@
       };
     } // utils.lib.eachDefaultSystem (system:
       let
-        pkgs = import nixpkgs { inherit system; overlays = [ self.overlay ]; };
+        pkgs = import nixpkgs { inherit system; overlays = [ self.overlay inputs.tidal.overlays.default ]; };
       in
       rec {
         packages = {
@@ -131,6 +136,5 @@
             packages.lean-language-server
           ];
         };
-      }) // {
-      };
+      });
 }
