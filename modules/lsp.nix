@@ -54,9 +54,9 @@ in
       "gi" = "<cmd>lua vim.lsp.buf.implementation()<CR>";
       "<leader>ca" = "<cmd>lua vim.lsp.buf.code_action()<cr>";
       "<leader>rn" = "<cmd>lua vim.lsp.buf.rename()<cr>";
-      "<leader>f" = "<cmd>lua vim.lsp.buf.formatting()<CR>";
-      "<leader>k" = "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>";
-      "<leader>j" = "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>";
+      "<leader>f" = "<cmd>lua vim.lsp.buf.format()<CR>";
+      "<leader>k" = "<cmd>lua vim.diagnostic.goto_prev()<CR>";
+      "<leader>j" = "<cmd>lua vim.diagnostic.goto_next()<CR>";
     };
 
     luaConfigRC = ''
@@ -131,7 +131,7 @@ in
       '' else ""}
       
       ${if config.completion.enable then ''
-        local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+        local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
       '' else ""}
 
       ${if cfg.languages.bash then ''
