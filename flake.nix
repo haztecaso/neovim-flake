@@ -66,7 +66,6 @@
                 python     = true;
                 typescript = true;
                 yaml       = true;
-                tidal      = true;
               };
             };
           };
