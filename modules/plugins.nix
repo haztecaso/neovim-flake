@@ -108,11 +108,11 @@ let
       startPlugins = [ 
         (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: with p; [ awk bash
         beancount bibtex c cmake comment cpp css cuda diff dockerfile fish glsl
-        go graphql haskell hjson html htmldjango http ini java javascript jq
-        jsdoc json json5 jsonc latex ledger llvm lua make markdown
-        markdown_inline mermaid nix norg ocaml org pascal php phpdoc python ql
-        regex ruby rust scala scheme scss sparql supercollider svelte terraform
-        todotxt toml tsx typescript vim vue yaml yaml ])) 
+        go graphql haskell hjson html http ini java javascript jq jsdoc json 
+        json5 jsonc latex ledger llvm lua make markdown markdown_inline mermaid 
+        nix norg ocaml org pascal php phpdoc python ql regex ruby rust scala 
+        scheme scss sparql supercollider svelte terraform todotxt toml tsx 
+        typescript vim vue yaml yaml ])) 
       ];
       luaConfigRC = ''
         require'nvim-treesitter.configs'.setup {
