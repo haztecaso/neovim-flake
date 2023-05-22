@@ -1,4 +1,4 @@
-syntax off
+syntax on
 
 set textwidth=80
 set ruler

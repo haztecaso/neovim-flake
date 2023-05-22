@@ -111,8 +111,8 @@ let
         go graphql haskell hjson html http java javascript jq jsdoc json json5 
         jsonc latex ledger llvm lua make markdown markdown_inline nix 
         norg ocaml org pascal php phpdoc python ql regex ruby rust scala scheme 
-        scss sparql supercollider svelte todotxt toml tsx typescript 
-        vim vue yaml yaml ])) 
+        scss sparql supercollider svelte todotxt toml tsx typescript vim vue 
+        yaml yaml ])) 
       ];
       luaConfigRC = ''
         require'nvim-treesitter.configs'.setup {
@@ -179,7 +179,6 @@ in
         tidal = mkDefault false;
         treesitter = mkDefault true;
       };
-      configRC = if cfg.treesitter then "" else "syntax on";
     }
   ] ++ (lib.mapAttrsToList (plugin: config: lib.mkIf cfg.${plugin} config) configs));
 }
