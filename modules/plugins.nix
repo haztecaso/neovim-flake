@@ -104,6 +104,34 @@ let
         autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.html,*.md,*.css,*.sass Neoformat
       '';
     };
+    treesitter = {
+      startPlugins = [ 
+        (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: with p; [ awk bash
+        beancount bibtex c cmake comment cpp css cuda diff dockerfile fish glsl
+        go graphql haskell hjson html htmldjango http ini java javascript jq
+        jsdoc json json5 jsonc latex ledger llvm lua make markdown
+        markdown_inline mermaid nix norg ocaml org pascal php phpdoc python ql
+        regex ruby rust scala scheme scss sparql supercollider svelte terraform
+        todotxt toml tsx typescript vim vue yaml yaml ])) 
+      ];
+      luaConfigRC = ''
+        require'nvim-treesitter.configs'.setup {
+          highlight = {
+            enable = true,
+          },
+          incremental_selection = {
+            enable = true,
+            keymaps = {
+              init_selection = "<CR>",
+              scope_incremental = "<CR>",
+              node_incremental = "<TAB>",
+              node_decremental = "<S-TAB>",
+            },
+          },
+        }
+      '';
+      
+    };
   };
 in
 {
@@ -129,6 +157,7 @@ in
       vim-visual-multi = mkBoolOption "Enable vim-visual-multi.";
       vinegar = mkBoolOption "Enable vim-vinegar.";
       tidal = mkBoolOption "Enable vim-tidal.";
+      treesitter = mkBoolOption "Enable nvim-treesitter.";
     };
 
   config = lib.mkMerge ([
@@ -148,6 +177,7 @@ in
         vim-visual-multi = mkDefault true;
         vinegar = mkDefault true;
         tidal = mkDefault false;
+        treesitter = mkDefault true;
       };
     }
   ] ++ (lib.mapAttrsToList (plugin: config: lib.mkIf cfg.${plugin} config) configs));
