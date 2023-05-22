@@ -179,6 +179,7 @@ in
         tidal = mkDefault false;
         treesitter = mkDefault true;
       };
+      configRC = if cfg.treesitter then "" else "syntax on";
     }
   ] ++ (lib.mapAttrsToList (plugin: config: lib.mkIf cfg.${plugin} config) configs));
 }
