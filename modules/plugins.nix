@@ -114,12 +114,13 @@ let
         scss sparql supercollider svelte todotxt toml tsx typescript vim vue 
         yaml yaml ])) 
         pkgs.vimPlugins.nvim-treesitter-textobjects
+        pkgs.vimPlugins.nvim-treesitter-textobjects
+        pkgs.vimPlugins.nvim-ts-autotag
       ];
       luaConfigRC = ''
         require'nvim-treesitter.configs'.setup {
-          highlight = {
-            enable = true,
-          },
+          autotag = { enable = true, },
+          highlight = { enable = true, },
           context_commentstring = {
             enable = true,
           },
