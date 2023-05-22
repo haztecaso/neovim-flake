@@ -111,7 +111,7 @@ let
         go graphql haskell hjson html http java javascript jq jsdoc json json5 
         jsonc latex ledger llvm lua make markdown markdown_inline nix 
         norg ocaml org pascal php phpdoc python ql regex ruby rust scala scheme 
-        scss sparql supercollider svelte terraform todotxt toml tsx typescript 
+        scss sparql supercollider svelte todotxt toml tsx typescript 
         vim vue yaml yaml ])) 
       ];
       luaConfigRC = ''
