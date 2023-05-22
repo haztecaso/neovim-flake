@@ -30,6 +30,7 @@ in
       nvim-lspconfig
       nvim-treesitter
       nvim-treesitter-context
+      goto-preview
       (if cfg.lightbulb then nvim-lightbulb else null)
       (if cfg.languages.lean then lean-nvim else null)
       (if config.completion.enable then cmp-nvim-lsp else null)
@@ -80,32 +81,14 @@ in
 
       local lspconfig = require'lspconfig'
 
-      --Tree sitter config
-      require('nvim-treesitter.configs').setup {
-        highlight = {
-          enable = true,
-          disable = {},
-        },
-        rainbow = {
-          enable = true,
-          extended_mode = true,
-        },
-         autotag = {
-          enable = true,
-        },
-        context_commentstring = {
-          enable = true,
-        },
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = "gnn",
-            node_incremental = "grn",
-            scope_incremental = "grc",
-            node_decremental = "grm",
-          },
-        },
+      -- goto-preview config
+      require('goto-preview').setup {
+        width = 120,
+        height = 15,
+        preview_window_title = { enable = true, position = "left" },
+        default_mappings = true
       }
+
 
       ${if cfg.lightbulb then ''
         require'nvim-lightbulb'.update_lightbulb {

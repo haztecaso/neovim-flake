@@ -113,10 +113,14 @@ let
         norg ocaml org pascal php phpdoc python ql regex ruby rust scala scheme 
         scss sparql supercollider svelte todotxt toml tsx typescript vim vue 
         yaml yaml ])) 
+        pkgs.vimPlugins.nvim-treesitter-textobjects
       ];
       luaConfigRC = ''
         require'nvim-treesitter.configs'.setup {
           highlight = {
+            enable = true,
+          },
+          context_commentstring = {
             enable = true,
           },
           incremental_selection = {
@@ -126,6 +130,17 @@ let
               scope_incremental = "<CR>",
               node_incremental = "<TAB>",
               node_decremental = "<S-TAB>",
+            },
+          },
+          textobjects = {
+            select = {
+              enable = true,
+              keymaps = {
+                ["c"] = { query = "@class.outer", desc = "select outer part of class"},
+                ["ic"] = { query = "@class.outer", desc = "select outer part of class"},
+                ["f"] = { query = "@function.outer", desc = "select outer part of function"},
+                ["if"] = { query = "@function.inner", desc = "select inner part of function"},
+              },
             },
           },
         }
