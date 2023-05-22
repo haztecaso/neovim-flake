@@ -10,13 +10,34 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    startPlugins = with pkgs.vimPlugins; [ gruvbox ];
-    globals = {
-      "gruvbox_contrast_dark" = "hard";
-    };
+    startPlugins = [ pkgs.vimPlugins.gruvbox-nvim ];
     configRC = ''
       colorscheme gruvbox
-      set bg=dark
+      set background=dark
+    '';
+    luaConfigRC = ''
+      require("gruvbox").setup({
+        undercurl = true,
+        underline = true,
+        bold = true,
+        italic = {
+          strings = false,
+          comments = true,
+          operators = false,
+          folds = true,
+        },
+        strikethrough = true,
+        invert_selection = false,
+        invert_signs = false,
+        invert_tabline = false,
+        invert_intend_guides = false,
+        inverse = true,
+        contrast = "hard",
+        palette_overrides = {},
+        overrides = {},
+        dim_inactive = false,
+        transparent_mode = true,
+      })
     '';
   };
 }
