@@ -9,6 +9,54 @@ let
     commentary.startPlugins = [ pkgs.vimPlugins.vim-commentary ];
     enuch.startPlugins = [ pkgs.neovimPlugins.vim-enuch ];
     repeat.startPlugins = [ pkgs.vimPlugins.repeat ];
+    ChatGPT = {
+      startPlugins = with pkgs.vimPlugins; [ 
+        ChatGPT-nvim 
+        nui-nvim
+        plenary-nvim
+        telescope-nvim
+      ];
+      luaConfigRC = ''
+      require("chatgpt").setup({
+        api_key_cmd = "${pkgs.pass}/bin/pass show openai_apikey"
+      })
+      require("which-key").register({
+        p = {
+          name = "ChatGPT",
+          o = {
+            function()
+              require("chatgpt").openChat()
+            end,
+            "Open"
+          },
+          ac = {
+            function()
+              require("chatgpt").run_action()
+            end,
+            "Run action"
+          },
+          aw = {
+            function()
+              require("chatgpt").open_with_awesome_prompt()
+            end,
+            "Open with awesome prompt"
+          },
+          c = {
+            function()
+              require("chatgpt").complete()
+            end,
+            "Complete code"
+          },
+          e = {
+            function()
+              require("chatgpt").edit_with_instructions()
+            end,
+            "Edit with instructions"
+          }
+        }
+      })
+      '';
+    };
     ctrlp = {
       startPlugins = [ pkgs.vimPlugins.ctrlp ];
       globals."ctrlp_show_hidden" = "1";
@@ -192,6 +240,7 @@ in
       nix = mkBoolOption "Enable vim-nix.";
       nvim-which-key = mkBoolOption "Enable nvim-which-key.";
       repeat = mkBoolOption "Enable vim-repeat.";
+      ChatGPT = mkBoolOption "Enable ChatGPT-nvim plugin";
       tidal = mkBoolOption "Enable vim-tidal.";
       treesitter = mkBoolOption "Enable nvim-treesitter.";
       vim-visual-multi = mkBoolOption "Enable vim-visual-multi.";
@@ -201,6 +250,7 @@ in
   config = lib.mkMerge ([
     {
       plugins = with lib; {
+        ChatGPT = mkDefault false;
         ack = mkDefault true;
         commentary = mkDefault true;
         ctrlp = mkDefault true;

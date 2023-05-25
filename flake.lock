@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "chatgpt": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1683703527,
+        "narHash": "sha256-NbttSDFPxZnoTAznCfG12vv9lPoFyCtVmgoKkUAWloQ=",
+        "owner": "jackMort",
+        "repo": "ChatGPT.nvim",
+        "rev": "5a6287cdd90838c727cb8ac8dbd4787702445680",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jackMort",
+        "repo": "ChatGPT.nvim",
+        "type": "github"
+      }
+    },
     "dirt-samples-src": {
       "flake": false,
       "locked": {
@@ -130,13 +146,17 @@
     "obsidian-nvim": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-Ra9CRo0NYaaf1svhobFR/pP7Zr576/FLqNYgn7HBDkQ=",
-        "type": "file",
-        "url": "https://github.com/epwalsh/obsidian.nvim"
+        "lastModified": 1684883457,
+        "narHash": "sha256-fYDstIT6VQ9q/Nyq/vJB6klIlRLcpqjC0eglBdO5Ys8=",
+        "owner": "epwalsh",
+        "repo": "obsidian.nvim",
+        "rev": "0f96267301160f429dd82a71aac817fe6c3615ea",
+        "type": "github"
       },
       "original": {
-        "type": "file",
-        "url": "https://github.com/epwalsh/obsidian.nvim"
+        "owner": "epwalsh",
+        "repo": "obsidian.nvim",
+        "type": "github"
       }
     },
     "rnix-lsp": {
@@ -165,6 +185,7 @@
     },
     "root": {
       "inputs": {
+        "chatgpt": "chatgpt",
         "neovim": "neovim",
         "nixpkgs": "nixpkgs",
         "nvim-neoclip": "nvim-neoclip",

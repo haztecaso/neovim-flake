@@ -24,22 +24,24 @@
     tidal = { url = "github:mitchmindtree/tidalcycles.nix"; };
 
     # Plugins
+    chatgpt = { url = "github:jackMort/ChatGPT.nvim"; flake = false;};
     nvim-neoclip = { url = "github:AckslD/nvim-neoclip.lua"; flake = false; };
     nvim-which-key = { url = "github:folke/which-key.nvim"; flake = false; };
+    obsidian-nvim = { url = "github:epwalsh/obsidian.nvim"; flake = false;};
     telescope-repo = { url = "github:cljoly/telescope-repo.nvim"; flake = false; };
     vim-enuch = { url = "github:tpope/vim-eunuch"; flake = false;};
-    obsidian-nvim = { url = "https://github.com/epwalsh/obsidian.nvim"; flake = false;};
   };
 
   outputs = { self, nixpkgs, utils, neovim, ... }@inputs:
     let
       lib = import ./lib.nix;
       plugins = [
+        "chatgpt"
         "nvim-neoclip"
         "nvim-which-key"
+        "obsidian-nvim"
         "telescope-repo"
         "vim-enuch"
-        "obsidian-nvim"
       ];
       overlay = final: prev: {
         rnix-lsp = inputs.rnix-lsp.defaultPackage.${final.system};
@@ -76,6 +78,7 @@
             completion.enable = true;
             snippets.enable   = true;
             telescope.enable  = true;
+            plugins.ChatGPT = true;
             lsp = {
               enable    = true;
               lightbulb = true;
