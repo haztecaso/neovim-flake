@@ -113,27 +113,6 @@ let
         "<leader>gD" = ":call MyCloseDiff()<CR>";
       };
     };
-    indent-blankline = {
-      startPlugins = [ pkgs.vimPlugins.indent-blankline-nvim ];
-      luaConfigRC = ''
-      vim.opt.termguicolors = true
-      vim.cmd [[highlight IndentBlanklineIndent1 guibg=#202020 gui=nocombine]]
-      vim.cmd [[highlight IndentBlanklineIndent2 guibg=#191919 gui=nocombine]]
-
-      require("indent_blankline").setup {
-        char = "",
-        char_highlight_list = {
-            "IndentBlanklineIndent1",
-            "IndentBlanklineIndent2",
-        },
-        space_char_highlight_list = {
-            "IndentBlanklineIndent1",
-            "IndentBlanklineIndent2",
-        },
-        show_trailing_blankline_indent = false,
-      }
-      '';
-    };
     lastplace.startPlugins = [ pkgs.vimPlugins.vim-lastplace ];
     latex = {
       startPlugins = [ pkgs.vimPlugins.vimtex ];
@@ -233,7 +212,6 @@ in
       ctrlp = mkBoolOption "Enable ctrlp plugin.";
       enuch = mkBoolOption "Enable vim-enuch.";
       git = mkBoolOption "Enable git support.";
-      indent-blankline = mkBoolOption "Enable .";
       lastplace = mkBoolOption "Enable vim-lastplace.";
       latex = mkBoolOption "Enable latex support.";
       neoformat = mkBoolOption "Enable neoformat.";
@@ -256,7 +234,6 @@ in
         ctrlp = mkDefault true;
         enuch = mkDefault true;
         git = mkDefault true;
-        indent-blankline = mkDefault true;
         lastplace = mkDefault true;
         latex = mkDefault true;
         neoformat = mkDefault true;
