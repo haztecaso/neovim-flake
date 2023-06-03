@@ -8,7 +8,7 @@ in
   };
   config = lib.mkIf cfg.enable {
     startPlugins = with pkgs; [
-      vimPlugins.plenary-nvim 
+      vimPlugins.plenary-nvim
       vimPlugins.telescope-nvim
       vimPlugins.telescope-fzf-native-nvim
       neovimPlugins.nvim-neoclip

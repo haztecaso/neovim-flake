@@ -10,51 +10,51 @@ let
     enuch.startPlugins = [ pkgs.neovimPlugins.vim-enuch ];
     repeat.startPlugins = [ pkgs.vimPlugins.repeat ];
     ChatGPT = {
-      startPlugins = with pkgs.vimPlugins; [ 
-        ChatGPT-nvim 
+      startPlugins = with pkgs.vimPlugins; [
+        ChatGPT-nvim
         nui-nvim
         plenary-nvim
         telescope-nvim
       ];
       luaConfigRC = ''
-      require("chatgpt").setup({
-        api_key_cmd = "${pkgs.pass}/bin/pass show openai_apikey"
-      })
-      require("which-key").register({
-        p = {
-          name = "ChatGPT",
-          o = {
-            function()
-              require("chatgpt").openChat()
-            end,
-            "Open"
-          },
-          ac = {
-            function()
-              require("chatgpt").run_action()
-            end,
-            "Run action"
-          },
-          aw = {
-            function()
-              require("chatgpt").open_with_awesome_prompt()
-            end,
-            "Open with awesome prompt"
-          },
-          c = {
-            function()
-              require("chatgpt").complete()
-            end,
-            "Complete code"
-          },
-          e = {
-            function()
-              require("chatgpt").edit_with_instructions()
-            end,
-            "Edit with instructions"
+        require("chatgpt").setup({
+          api_key_cmd = "${pkgs.pass}/bin/pass show openai_apikey"
+        })
+        require("which-key").register({
+          p = {
+            name = "ChatGPT",
+            o = {
+              function()
+                require("chatgpt").openChat()
+              end,
+              "Open"
+            },
+            ac = {
+              function()
+                require("chatgpt").run_action()
+              end,
+              "Run action"
+            },
+            aw = {
+              function()
+                require("chatgpt").open_with_awesome_prompt()
+              end,
+              "Open with awesome prompt"
+            },
+            c = {
+              function()
+                require("chatgpt").complete()
+              end,
+              "Complete code"
+            },
+            e = {
+              function()
+                require("chatgpt").edit_with_instructions()
+              end,
+              "Edit with instructions"
+            }
           }
-        }
-      })
+        })
       '';
     };
     ctrlp = {
@@ -74,37 +74,37 @@ let
         "gitgutter_sign_modified_removed" = "~_";
       };
       configRC = ''
-		function FugitiveToggle() abort
-		  try
-		    exe filter(getwininfo(), "get(v:val['variables'], 'fugitive_status', v:false) != v:false")[0].winnr .. "wincmd c"
-		  catch /E684/
-		    vertical Git
-		    vertical resize 80
-		  endtry
-		endfunction
+        		function FugitiveToggle() abort
+        		  try
+        		    exe filter(getwininfo(), "get(v:val['variables'], 'fugitive_status', v:false) != v:false")[0].winnr .. "wincmd c"
+        		  catch /E684/
+        		    vertical Git
+        		    vertical resize 80
+        		  endtry
+        		endfunction
 
-        " vimdiff current vs git head (fugitive extension) {{{2
-        nnoremap <Leader>gd :Gdiff<cr>
-        " Close any corresponding diff buffer
-        function! MyCloseDiff()
-          if (&diff == 0 || getbufvar('#', '&diff') == 0)
-                \ && (bufname('%') !~ '^fugitive:' && bufname('#') !~ '^fugitive:')
-            echom "Not in diff view."
-            return
-          endif
+                " vimdiff current vs git head (fugitive extension) {{{2
+                nnoremap <Leader>gd :Gdiff<cr>
+                " Close any corresponding diff buffer
+                function! MyCloseDiff()
+                  if (&diff == 0 || getbufvar('#', '&diff') == 0)
+                        \ && (bufname('%') !~ '^fugitive:' && bufname('#') !~ '^fugitive:')
+                    echom "Not in diff view."
+                    return
+                  endif
         
-          " close current buffer if alternate is not fugitive but current one is
-          if bufname('#') !~ '^fugitive:' && bufname('%') =~ '^fugitive:'
-            if bufwinnr("#") == -1
-              b #
-              bd #
-            else
-              bd
-            endif
-          else
-            bd # 
-          endif
-        endfunction
+                  " close current buffer if alternate is not fugitive but current one is
+                  if bufname('#') !~ '^fugitive:' && bufname('%') =~ '^fugitive:'
+                    if bufwinnr("#") == -1
+                      b #
+                      bd #
+                    else
+                      bd
+                    endif
+                  else
+                    bd # 
+                  endif
+                endfunction
       '';
 
       nmap = {
@@ -153,14 +153,68 @@ let
       '';
     };
     treesitter = {
-      startPlugins = [ 
-        (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: with p; [ bash
-        beancount bibtex c cmake comment cpp css cuda diff dockerfile fish glsl
-        go graphql haskell hjson html http java javascript jq jsdoc json json5 
-        jsonc latex ledger llvm lua make markdown markdown_inline nix 
-        norg ocaml org pascal php phpdoc python ql regex ruby rust scala scheme 
-        scss sparql supercollider svelte todotxt toml tsx typescript vim vue 
-        yaml yaml ])) 
+      startPlugins = [
+        (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: with p; [
+          bash
+          beancount
+          bibtex
+          c
+          cmake
+          comment
+          cpp
+          css
+          cuda
+          diff
+          dockerfile
+          fish
+          glsl
+          go
+          graphql
+          haskell
+          hjson
+          html
+          http
+          java
+          javascript
+          jq
+          jsdoc
+          json
+          json5
+          jsonc
+          latex
+          ledger
+          llvm
+          lua
+          make
+          markdown
+          markdown_inline
+          nix
+          norg
+          ocaml
+          org
+          pascal
+          php
+          phpdoc
+          python
+          ql
+          regex
+          ruby
+          rust
+          scala
+          scheme
+          scss
+          sparql
+          supercollider
+          svelte
+          todotxt
+          toml
+          tsx
+          typescript
+          vim
+          vue
+          yaml
+          yaml
+        ]))
         pkgs.vimPlugins.nvim-treesitter-textobjects
         pkgs.vimPlugins.nvim-treesitter-textobjects
         pkgs.vimPlugins.nvim-ts-autotag
@@ -194,7 +248,7 @@ let
           },
         }
       '';
-      
+
     };
   };
 in

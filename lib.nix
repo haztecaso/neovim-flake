@@ -18,19 +18,20 @@ rec {
         specialArgs = { inherit pkgs; };
       };
       cfg = vimOptions.config;
-    in {
-        viAlias = true;
-        vimAlias = true;
-        configure = {
-          customRC = cfg.configRC;
-          packages.myVimPackage = with pkgs.vimPlugins; {
-            start = cfg.startPlugins;
-            opt = cfg.optPlugins;
-          };
+    in
+    {
+      viAlias = true;
+      vimAlias = true;
+      configure = {
+        customRC = cfg.configRC;
+        packages.myVimPackage = with pkgs.vimPlugins; {
+          start = cfg.startPlugins;
+          opt = cfg.optPlugins;
         };
       };
+    };
 
-  mkNeovim = {pkgs, ... }@opts: pkgs.neovim.override (mkNeovimOverrideOptions opts);
-  mkNeovimNightly = {pkgs, ... }@opts: pkgs.wrapNeovim pkgs.neovim-nightly (mkNeovimOverrideOptions opts);
+  mkNeovim = { pkgs, ... }@opts: pkgs.neovim.override (mkNeovimOverrideOptions opts);
+  mkNeovimNightly = { pkgs, ... }@opts: pkgs.wrapNeovim pkgs.neovim-nightly (mkNeovimOverrideOptions opts);
 
 }
