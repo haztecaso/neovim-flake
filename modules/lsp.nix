@@ -61,6 +61,9 @@ in
     };
 
     luaConfigRC = ''
+      -- autoformat on save
+      vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
+
       local wk = require("which-key")
       wk.register({
         K = {"Code hover"},
@@ -116,6 +119,24 @@ in
       ${if config.completion.enable then ''
         local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
       '' else ""}
+
+      lspconfig.efm.setup {
+          ${if config.completion.enable then "capabilities = capabilities," else ""}
+          cmd = { "${pkgs.efm-langserver}/bin/efm-langserver" },
+          init_options = { documentFormatting = true },
+          settings = {
+              rootMarkers = { ".git/" },
+              lintDebounce = 100,
+              languages = {
+                ${if cfg.languages.python then ''
+                python = {
+                    { formatCommand = "${pkgs.black}/bin/black -", formatStdin = true, },
+                    { formatCommand = "${pkgs.isort}/bin/isort --stdout --profile black -", formatStdin = true, }
+                },
+                '' else ""}
+              },
+          },
+      }
 
       ${if cfg.languages.bash then ''
         lspconfig.bashls.setup{
