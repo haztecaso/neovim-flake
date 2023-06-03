@@ -13,14 +13,6 @@
       };
     };
 
-    rnix-lsp = {
-      url = "github:nix-community/rnix-lsp";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        utils.follows = "utils";
-      };
-    };
-
     tidal = { url = "github:mitchmindtree/tidalcycles.nix"; };
 
     # Plugins
@@ -44,7 +36,6 @@
         "vim-enuch"
       ];
       overlay = final: prev: {
-        rnix-lsp = inputs.rnix-lsp.defaultPackage.${final.system};
         neovim-nightly = neovim.defaultPackage.${final.system};
         mkNeovim = config: lib.mkNeovim { inherit config; pkgs = final; };
         mkNeovimNightly = config: lib.mkNeovimNightly { inherit config; pkgs = final; };
