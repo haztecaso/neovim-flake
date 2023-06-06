@@ -1,0 +1,53 @@
+
+snippet module "Module" b 
+{ ... }: {
+  $1
+}
+endsnippet
+
+snippet moduleWithParams "Module" b
+{ config, lib, pkgs, ... }: {
+  $1
+}
+endsnippet
+
+snippet moduleWithOptions "Module with options " b
+{ config, lib, pkgs, ... }: 
+let
+  cfg = config${1:.module.path};
+in
+{
+  options = with lib; {
+    enable = mkEnableOption "Wether to enable ${2:name} module.";
+  };
+  config$1 = lib.mkIf cfg.enable {
+    $0
+  };
+}
+endsnippet
+
+snippet pkg "Package derivation"
+{ stdenv }:
+stdenv.mkDerivation rec {
+  name = "${1:name}";
+  version = "${2:0.0.1}";
+
+  src = ./.;
+
+  nativeBuildInputs = [ ];
+  buildInputs = [ ];
+
+  buildPhase = ''
+  '';
+
+  installPhase = ''
+  '';
+
+  meta = {
+    description = "";
+	homepage = "";
+	license = lib.licenses.;
+  };
+}
+endsnippet
+
