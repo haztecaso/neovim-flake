@@ -57,6 +57,7 @@
                 html = true;
                 json = true;
                 lean = false;
+                lua = true;
                 nix = true;
                 python = true;
                 tex = true;
