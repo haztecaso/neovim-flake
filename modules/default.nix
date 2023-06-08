@@ -2,23 +2,12 @@
 {
 
   imports = [
+    ./completion
     ./core.nix
-    ./completion.nix
-    ./gruvbox.nix
-    ./lsp.nix
-    ./plugins.nix
+    ./lsp
+    ./plugins
     ./snippets.nix
-    ./telescope.nix
   ];
-
-  startPlugins = with pkgs.vimPlugins; with pkgs.neovimPlugins; [
-    vim-airline
-  ];
-
-  globals = {
-    "airline#extensions#tabline#enabled" = "1";
-    "airline_symbols_ascii" = "1";
-  };
 
   nnoremap = {
     "<leader><Space>" = ":nohlsearch<cr>";
@@ -28,5 +17,29 @@
     "<leader>p" = ":setlocal paste!<CR>";
     "gQ" = "vipJgq<CR>";
   };
+
+  configRC = ''
+    syntax on
+
+    set textwidth=80
+    set ruler
+    "set nowrap
+
+    set bg=dark
+
+    set autochdir
+
+    set incsearch
+    set hlsearch
+    set ignorecase
+    set smartcase
+
+    set wildmenu
+    set wildignore=*.o,*~,*.pyc,*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+    set wildmode=longest:full,full
+
+    set colorcolumn=80
+    set noshowcmd
+  '';
 
 }
