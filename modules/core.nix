@@ -8,11 +8,6 @@ let
 in
 {
   options = with lib; {
-    commonConfig = mkOption {
-      description = "Common config";
-      type = types.lines;
-      default = builtins.readFile ../common.vim;
-    };
 
     configRC = mkOption {
       description = "vimrc contents";
@@ -24,6 +19,12 @@ in
       description = "vim lua config";
       type = types.lines;
       default = "";
+    };
+
+    extraPackages = mkOption {
+      default = [ ];
+      description = "Extra packages available to nvim.";
+      type = with types; listOf package;
     };
 
     startPlugins = mkOption {
@@ -209,7 +210,6 @@ in
     {
       configRC = ''
         ${lib.concatStringsSep "\n" globalsScript}
-        ${cfg.commonConfig}
 
         let mapleader = "${cfg.leader}"
         let maplocalleader = "${cfg.localleader}"

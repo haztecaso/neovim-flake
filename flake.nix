@@ -27,52 +27,28 @@
   outputs = { self, nixpkgs, utils, neovim, ... }@inputs:
     let
       lib = import ./lib.nix;
-      plugins = [
-        "chatgpt"
-        "nvim-neoclip"
-        "nvim-which-key"
-        "obsidian-nvim"
-        "telescope-repo"
-        "vim-enuch"
-      ];
       overlay = final: prev: {
         neovim-nightly = neovim.defaultPackage.${final.system};
         mkNeovim = config: lib.mkNeovim { inherit config; pkgs = final; };
         mkNeovimNightly = config: lib.mkNeovimNightly { inherit config; pkgs = final; };
-        neovimPlugins = lib.mkPlugins { inherit inputs plugins; pkgs = final; };
-        neovimBase = lib.mkNeovim { pkgs = final; };
-        neovimWebDev = lib.mkNeovim {
+        neovimPlugins = lib.mkPlugins {
+          inherit inputs; plugins = [
+          "chatgpt"
+          "nvim-neoclip"
+          "nvim-which-key"
+          "obsidian-nvim"
+          "telescope-repo"
+          "vim-enuch"
+        ];
           pkgs = final;
-          config = {
-            completion.enable = true;
-            snippets.enable = true;
-            telescope.enable = true;
-            lsp = {
-              enable = true;
-              lightbulb = true;
-              languages = {
-                bash = true;
-                css = true;
-                docker = true;
-                html = true;
-                json = true;
-                python = true;
-                typescript = true;
-                yaml = true;
-              };
-            };
-          };
         };
-        neovimFull = lib.mkNeovim {
+        neovimDefault = lib.mkNeovim {
           pkgs = final;
           config = {
             completion.enable = true;
             snippets.enable = true;
-            telescope.enable = true;
-            plugins.ChatGPT = true;
             lsp = {
               enable = true;
-              lightbulb = true;
               languages = {
                 bash = true;
                 clang = true;
@@ -80,7 +56,7 @@
                 docker = true;
                 html = true;
                 json = true;
-                lean = true;
+                lean = false;
                 nix = true;
                 python = true;
                 tex = true;
@@ -89,8 +65,53 @@
                 yaml = true;
               };
             };
+            plugins = {
+              telescope = true;
+              treesitter = true;
+              ack = true;
+              commentary = true;
+              enuch = true;
+              fugitive = true;
+              gitgutter = true;
+              gruvbox = true;
+              lastplace = true;
+              nix = true;
+              repeat = true;
+              tidal = false;
+              vim-airline = true;
+              vim-visual-multi = true;
+              vimtex = true;
+              vinegar = true;
+            };
           };
         };
+        neovimBase = lib.mkNeovim {
+          pkgs = final;
+          config = {
+            completion.enable = true;
+            snippets.enable = true;
+            lsp.enable = false;
+            plugins = {
+              telescope = false;
+              treesitter = false;
+              ack = true;
+              commentary = true;
+              enuch = true;
+              fugitive = true;
+              gitgutter = true;
+              gruvbox = true;
+              lastplace = true;
+              nix = true;
+              repeat = true;
+              tidal = false;
+              vim-airline = true;
+              vim-visual-multi = true;
+              vimtex = true;
+              vinegar = true;
+            };
+          };
+        };
+        # neovimFull = lib.mkNeovim { pkgs = final; config = profiles.full; };
         lean-language-server = (final.callPackage (import ./pkgs/lean-language-server) { nodejs = final."nodejs-18_x"; }).lean-language-server;
       };
     in
@@ -102,7 +123,7 @@
           pkgs = import nixpkgs { inherit system; overlays = [ self.overlay ]; };
         in
         {
-          neovimFull.${system} = pkgs.neovimFull;
+          # neovimFull.${system} = pkgs.neovimFull;
           neovimBase.${system} = pkgs.neovimBase;
           neovimWebDev.${system} = pkgs.neovimWebDev;
         };
@@ -113,20 +134,20 @@
       rec {
         packages = {
           neovimBase = pkgs.neovimBase;
-          neovimFull = pkgs.neovimFull;
-          neovimWebDev = pkgs.neovimWebDev;
+          # neovimFull = pkgs.neovimFull;
+          neovimDefault = pkgs.neovimDefault;
           lean-language-server = pkgs.lean-language-server;
-          default = packages.neovimFull;
+          default = packages.neovimDefault;
         };
 
         apps.default = {
           type = "app";
-          program = "${packages.neovimFull}/bin/nvim";
+          program = "${packages.neovimDefault}/bin/nvim";
         };
 
         devShell = pkgs.mkShell {
           nativeBuildInputs = with pkgs; [
-            packages.neovimFull
+            # packages.neovimFull
             nodePackages.node2nix
             packages.lean-language-server
           ];

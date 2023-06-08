@@ -12,19 +12,21 @@ rec {
 
   mkNeovimOverrideOptions = { pkgs, config ? { }, ... }:
     let
-      neovimPlugins = pkgs.neovimPlugins;
       vimOptions = pkgs.lib.evalModules {
         modules = [{ imports = [ ./modules ]; } config];
         specialArgs = { inherit pkgs; };
       };
       cfg = vimOptions.config;
+      lib = pkgs.lib;
     in
     {
       viAlias = true;
       vimAlias = true;
+      extraMakeWrapperArgs = lib.optionalString (cfg.extraPackages != [ ])
+        '' --prefix PATH : "${lib.makeBinPath cfg.extraPackages}" '';
       configure = {
         customRC = cfg.configRC;
-        packages.myVimPackage = with pkgs.vimPlugins; {
+        packages.myVimPackage = {
           start = cfg.startPlugins;
           opt = cfg.optPlugins;
         };
