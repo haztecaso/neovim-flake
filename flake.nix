@@ -59,6 +59,7 @@
                 lean = false;
                 lua = true;
                 nix = true;
+                php = true;
                 python = true;
                 tex = true;
                 typescript = true;

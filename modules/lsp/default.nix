@@ -76,7 +76,7 @@ let
     lua = {
       extraPackages = [ pkgs.lua-language-server pkgs.luaformatter ];
       luaConfigRC = ''
-        require'lspconfig'.lua_ls.setup {
+        lspconfig.lua_ls.setup {
           settings = {
             Lua = {
               runtime = {
@@ -124,6 +124,12 @@ let
             },
           },
         }
+      '';
+    };
+    php = {
+      extraPackages = [ pkgs.phpactor ];
+      luaConfigRC = ''
+        lspconfig.phpactor.setup{}
       '';
     };
     python = {
