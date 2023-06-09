@@ -63,7 +63,6 @@
     ]))
     pkgs.vimPlugins.nvim-treesitter-context
     pkgs.vimPlugins.nvim-treesitter-textobjects
-    pkgs.vimPlugins.nvim-treesitter-textobjects
     pkgs.vimPlugins.nvim-ts-autotag
   ];
 }
