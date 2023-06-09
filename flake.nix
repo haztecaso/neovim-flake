@@ -68,8 +68,6 @@
               };
             };
             plugins = {
-              telescope = true;
-              treesitter = true;
               ack = true;
               commentary = true;
               enuch = true;
@@ -79,7 +77,10 @@
               lastplace = true;
               nix = true;
               repeat = true;
+              telescope = true;
               tidal = false;
+              toggleterm = true;
+              treesitter = true;
               vim-airline = true;
               vim-visual-multi = true;
               vimtex = true;
@@ -94,8 +95,6 @@
             snippets.enable = true;
             lsp.enable = false;
             plugins = {
-              telescope = false;
-              treesitter = false;
               ack = true;
               commentary = true;
               enuch = true;
@@ -105,7 +104,10 @@
               lastplace = true;
               nix = true;
               repeat = true;
+              telescope = false;
               tidal = false;
+              toggleterm = true;
+              treesitter = false;
               vim-airline = true;
               vim-visual-multi = true;
               vimtex = true;

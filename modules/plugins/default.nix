@@ -23,6 +23,7 @@ let
     "gitgutter"
     "gruvbox"
     "telescope"
+    "toggleterm"
     "treesitter"
     "vimtex"
   ]);
