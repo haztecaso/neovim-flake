@@ -66,5 +66,4 @@
     pkgs.vimPlugins.nvim-treesitter-textobjects
     pkgs.vimPlugins.nvim-ts-autotag
   ];
-  luaConfigRC = builtins.readFile ./treesitter.lua;
 }
