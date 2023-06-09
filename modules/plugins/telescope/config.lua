@@ -9,7 +9,6 @@ local telescope_extensions = require('telescope').extensions
 vim.keymap.set('n', '<C-f>', telescope_builtins.live_grep, {})
 vim.keymap.set('n', '<C-b>', telescope_builtins.buffers, {})
 vim.keymap.set('n', '<C-p>', telescope_builtins.git_files, {})
-vim.keymap.set('n', '<C-b>', telescope_builtins.buffers, {})
 vim.keymap.set('n', '<C-y>', telescope_extensions.neoclip.default, {})
 vim.keymap.set('n', '<M-p>', telescope_builtins.find_files, {})
 vim.keymap.set('n', '<M-r>', telescope_builtins.command_history, {})
@@ -42,8 +41,7 @@ require('telescope').setup {
             },
         },
         vimgrep_arguments = {
-            "${pkgs.ripgrep}/bin/ripgrep",
-            "--color=never",
+            "rg",
             "--no-heading",
             "--with-filename",
             "--line-number",
