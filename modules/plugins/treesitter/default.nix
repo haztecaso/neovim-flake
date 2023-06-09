@@ -59,7 +59,6 @@
       vim
       vue
       yaml
-      yaml
     ]))
     pkgs.vimPlugins.nvim-treesitter-context
     pkgs.vimPlugins.nvim-treesitter-textobjects
