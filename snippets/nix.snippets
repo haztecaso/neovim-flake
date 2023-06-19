@@ -17,10 +17,10 @@ let
   cfg = config${1:.module.path};
 in
 {
-  options = with lib; {
+  options$1 = with lib; {
     enable = mkEnableOption "Wether to enable ${2:name} module.";
   };
-  config$1 = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     $0
   };
 }
