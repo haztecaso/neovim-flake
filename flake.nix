@@ -17,6 +17,8 @@
 
     # Plugins
     chatgpt = { url = "github:jackMort/ChatGPT.nvim"; flake = false; };
+    copilot-lua = { url = "github:zbirenbaum/copilot.lua"; flake = false; };
+    copilot-cmp = { url = "github:zbirenbaum/copilot-cmp"; flake = false; };
     nvim-neoclip = { url = "github:AckslD/nvim-neoclip.lua"; flake = false; };
     nvim-which-key = { url = "github:folke/which-key.nvim"; flake = false; };
     obsidian-nvim = { url = "github:epwalsh/obsidian.nvim"; flake = false; };
@@ -34,6 +36,8 @@
         neovimPlugins = lib.mkPlugins {
           inherit inputs; plugins = [
           "chatgpt"
+          "copilot-lua"
+          "copilot-cmp"
           "nvim-neoclip"
           "nvim-which-key"
           "obsidian-nvim"
@@ -70,6 +74,7 @@
             plugins = {
               ack = true;
               commentary = true;
+              copilot = true;
               enuch = true;
               fugitive = true;
               gitgutter = true;
@@ -129,7 +134,7 @@
         {
           # neovimFull.${system} = pkgs.neovimFull;
           neovimBase.${system} = pkgs.neovimBase;
-          neovimWebDev.${system} = pkgs.neovimWebDev;
+          # neovimWebDev.${system} = pkgs.neovimWebDev;
         };
     } // utils.lib.eachDefaultSystem (system:
       let

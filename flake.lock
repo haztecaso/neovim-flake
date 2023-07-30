@@ -16,6 +16,22 @@
         "type": "github"
       }
     },
+    "copilot-lua": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1687582763,
+        "narHash": "sha256-7dpjwP086FrtzywUsI+pbUXexaW4HCrWT3MPfhCzPuU=",
+        "owner": "zbirenbaum",
+        "repo": "copilot.lua",
+        "rev": "33aa9419da8f9bf9b6a992e6c9c7b7f9e36dac06",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zbirenbaum",
+        "repo": "copilot.lua",
+        "type": "github"
+      }
+    },
     "dirt-samples-src": {
       "flake": false,
       "locked": {
@@ -141,6 +157,7 @@
     "root": {
       "inputs": {
         "chatgpt": "chatgpt",
+        "copilot-lua": "copilot-lua",
         "neovim": "neovim",
         "nixpkgs": "nixpkgs",
         "nvim-neoclip": "nvim-neoclip",

@@ -1,4 +1,3 @@
-with builtins;
 rec {
   mkPlugins = { pkgs, inputs, plugins }:
     let

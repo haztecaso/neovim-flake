@@ -19,6 +19,7 @@ let
   importedConfigs = builtins.listToAttrs (map importConfig [
     "ChatGPT"
     "ack"
+    "copilot"
     "fugitive"
     "gitgutter"
     "gruvbox"
