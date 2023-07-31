@@ -29,6 +29,7 @@ cmp.setup {
         ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     },
     sources = {
+        { name = 'copilot' },
         { name = 'ultisnips' },
         { name = 'nvim_lsp' },
         { name = 'path' },
