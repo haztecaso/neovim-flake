@@ -120,7 +120,6 @@
             };
           };
         };
-        # neovimFull = lib.mkNeovim { pkgs = final; config = profiles.full; };
         lean-language-server = (final.callPackage (import ./pkgs/lean-language-server) { nodejs = final."nodejs-18_x"; }).lean-language-server;
       };
     in
@@ -132,9 +131,8 @@
           pkgs = import nixpkgs { inherit system; overlays = [ self.overlay ]; };
         in
         {
-          # neovimFull.${system} = pkgs.neovimFull;
+          neovimDefault.${system} = pkgs.neovimDefault;
           neovimBase.${system} = pkgs.neovimBase;
-          # neovimWebDev.${system} = pkgs.neovimWebDev;
         };
     } // utils.lib.eachDefaultSystem (system:
       let
@@ -143,7 +141,6 @@
       rec {
         packages = {
           neovimBase = pkgs.neovimBase;
-          # neovimFull = pkgs.neovimFull;
           neovimDefault = pkgs.neovimDefault;
           lean-language-server = pkgs.lean-language-server;
           default = packages.neovimDefault;
@@ -156,7 +153,6 @@
 
         devShell = pkgs.mkShell {
           nativeBuildInputs = with pkgs; [
-            # packages.neovimFull
             nodePackages.node2nix
             packages.lean-language-server
           ];
