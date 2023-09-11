@@ -83,7 +83,7 @@
               nix = true;
               repeat = true;
               telescope = true;
-              tidal = false;
+              tidal = true;
               toggleterm = true;
               treesitter = true;
               vim-airline = true;
