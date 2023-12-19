@@ -1,7 +1,7 @@
 rec {
   mkPlugins = { pkgs, inputs, plugins }:
     let
-      buildPlug = name: pkgs.vimUtils.buildVimPluginFrom2Nix {
+      buildPlug = name: pkgs.vimUtils.buildVimPlugin {
         pname = name;
         version = "master";
         src = builtins.getAttr name inputs;

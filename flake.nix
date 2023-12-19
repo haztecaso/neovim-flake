@@ -153,8 +153,8 @@
 
         devShell = pkgs.mkShell {
           nativeBuildInputs = with pkgs; [
-            nodePackages.node2nix
-            packages.lean-language-server
+            # nodePackages.node2nix
+            # packages.lean-language-server
           ];
         };
       });
