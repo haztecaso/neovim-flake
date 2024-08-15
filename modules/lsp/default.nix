@@ -22,11 +22,11 @@ let
       '';
     };
     css = {
-      extraPackages = [ pkgs.nodePackages.vscode-css-languageserver-bin ];
+      extraPackages = [ pkgs.nodePackages.vscode-langservers-extracted ];
       luaConfigRC = ''
         lspconfig.cssls.setup{
           capabilities = capabilities,
-          cmd = {'css-languageserver', '--stdio' };
+          cmd = {'vscode-css-language-server', '--stdio' };
           filetypes = { "css", "scss", "less" }; 
         }
       '';
@@ -41,21 +41,21 @@ let
       '';
     };
     html = {
-      extraPackages = [ pkgs.nodePackages.vscode-html-languageserver-bin ];
+      extraPackages = [ pkgs.nodePackages.vscode-langservers-extracted ];
       luaConfigRC = ''
         lspconfig.html.setup{
           capabilities = capabilities,
-          cmd = {'html-languageserver', '--stdio' };
+          cmd = {'vscode-html-language-server', '--stdio' };
           filetypes = { "html", "css", "javascript" }; 
         }
       '';
     };
     json = {
-      extraPackages = [ pkgs.nodePackages.vscode-json-languageserver-bin ];
+      extraPackages = [ pkgs.nodePackages.vscode-langservers-extracted ];
       luaConfigRC = ''
         lspconfig.jsonls.setup{
           capabilities = capabilities,
-          cmd = {'json-languageserver', '--stdio' };
+          cmd = {'vscode-json-language-server', '--stdio' };
           filetypes = { "json", "html", "css", "javascript" }; 
         }
       '';
@@ -133,7 +133,7 @@ let
       '';
     };
     python = {
-      extraPackages = [ pkgs.nodePackages.pyright pkgs.black pkgs.isort ];
+      extraPackages = [ pkgs.pyright pkgs.black pkgs.isort ];
       luaConfigRC = ''
         lspconfig.pyright.setup{
           capabilities = capabilities,

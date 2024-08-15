@@ -5,13 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     utils.url = "github:numtide/flake-utils";
 
-    neovim = {
-      url = "github:neovim/neovim?dir=contrib";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "utils";
-      };
-    };
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
     tidal = { url = "github:mitchmindtree/tidalcycles.nix"; };
 
@@ -26,11 +20,11 @@
     vim-enuch = { url = "github:tpope/vim-eunuch"; flake = false; };
   };
 
-  outputs = { self, nixpkgs, utils, neovim, ... }@inputs:
+  outputs = { self, nixpkgs, utils, ... }@inputs:
     let
       lib = import ./lib.nix;
       overlay = final: prev: {
-        neovim-nightly = neovim.defaultPackage.${final.system};
+        neovim-nightly = inputs.neovim-nightly-overlay.packages.${final.system}.default;
         mkNeovim = config: lib.mkNeovim { inherit config; pkgs = final; };
         mkNeovimNightly = config: lib.mkNeovimNightly { inherit config; pkgs = final; };
         neovimPlugins = lib.mkPlugins {

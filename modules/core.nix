@@ -179,12 +179,12 @@ in
   config =
     let
       filterNonNull = mappings: lib.filterAttrs (name: value: value != null) mappings;
-      globalsScript = lib.mapAttrsFlatten (name: value: "let g:${name}=${builtins.toJSON value}") (filterNonNull cfg.globals);
+      globalsScript = lib.mapAttrsToList (name: value: "let g:${name}=${builtins.toJSON value}") (filterNonNull cfg.globals);
 
       matchCtrl = it: builtins.match "Ctrl-(.)(.*)" it;
       mapKeybinding = it:
         let groups = matchCtrl it; in if groups == null then it else "<C-${lib.toUpper (lib.head groups)}>${lib.head (lib.tail groups)}";
-      mapVimBinding = prefix: mappings: lib.mapAttrsFlatten (name: value: "${prefix} ${mapKeybinding name} ${value}") (filterNonNull mappings);
+      mapVimBinding = prefix: mappings: lib.mapAttrsToList (name: value: "${prefix} ${mapKeybinding name} ${value}") (filterNonNull mappings);
 
       nnoremap = mapVimBinding "nnoremap" cfg.nnoremap;
       inoremap = mapVimBinding "inoremap" cfg.inoremap;
