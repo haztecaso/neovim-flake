@@ -4,7 +4,7 @@
     cmp-buffer.enable = true;
     copilot-cmp.enable = true;
     cmp-path.enable = true;
-    cmp-nvim-ultisnips.enable = true;
+    cmp_luasnip.enable = true;
     cmp-cmdline.enable = true;
     cmp-latex-symbols.enable = true;
     cmp = {
@@ -17,7 +17,7 @@
             { name = 'nvim_lsp' },
             { name = 'copilot' },
             { name = 'path' },
-            { name = 'ultisnips' },
+            { name = 'luasnip' },
             { name = 'cmdline' },
             { name = 'latex_symbols' },
             { name = 'buffer', option = {
@@ -25,52 +25,87 @@
             }},
           })
         '';
-        snippet.expand = "function(args) vim.fn['UltiSnips#Anon'](args.body) end";
+        snippet.expand = "function(args) require('luasnip').lsp_expand(args.body) end";
         mapping.__raw = ''
           cmp.mapping.preset.insert({
-            ["<Tab>"] = cmp.mapping(
-                function(fallback)
-                    -- cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
-                    cmp_ultisnips_mappings.jump_forwards(fallback)
-                end,
-                { "i", "s", }
-            ),
-            ["<S-Tab>"] = cmp.mapping(
-                function(fallback)
-                    cmp_ultisnips_mappings.jump_backwards(fallback)
-                end,
-                { "i", "s", }
-            ),
-            ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-            ['<C-f>'] = cmp.mapping.scroll_docs(4),
-            ['<C-Space>'] = cmp.mapping.complete(),
-            ['<C-e>'] = cmp.mapping.abort(),
-            -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-            ['<CR>'] = cmp.mapping.confirm({ select = true }), 
-          })
+                ['<C-j>'] = cmp.mapping.select_next_item(),
+                ['<C-k>'] = cmp.mapping.select_prev_item(),
+                ['<C-e>'] = cmp.mapping.abort(),
+
+                ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+
+                ['<C-f>'] = cmp.mapping.scroll_docs(4),
+
+                ['<C-Space>'] = cmp.mapping.complete(),
+
+                ['<S-CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+
+                -- Taken from https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#luasnip
+                -- to stop interference between cmp and luasnip
+
+                ['<CR>'] = cmp.mapping(function(fallback)
+                      if cmp.visible() then
+                          if luasnip.expandable() then
+                              luasnip.expand()
+                          else
+                              cmp.confirm({
+                                  select = true,
+                              })
+                          end
+                      else
+                          fallback()
+                      end
+                  end),
+
+                ["<Tab>"] = cmp.mapping(function(fallback)
+                  if cmp.visible() then
+                    cmp.select_next_item()
+                  elseif luasnip.locally_jumpable(1) then
+                    luasnip.jump(1)
+                  else
+                    fallback()
+                  end
+                end, { "i", "s" }),
+
+                ["<S-Tab>"] = cmp.mapping(function(fallback)
+                  if cmp.visible() then
+                    cmp.select_prev_item()
+                  elseif luasnip.locally_jumpable(-1) then
+                    luasnip.jump(-1)
+                  else
+                    fallback()
+                  end
+                end, { "i", "s" }),
+              })
         '';
       };
     };
   };
   extraConfigLuaPre = ''
     local cmp = require 'cmp'
-    cmp_ultisnips_mappings = require 'cmp_nvim_ultisnips.mappings'
+    luasnip = require("luasnip")
+
 
     cmp.setup.cmdline('/', {
-        completion = { autocomplete = false },
-        sources = {
-            -- { name = 'buffer' }
-            { name = 'buffer', opts = { keyword_pattern = [=[[^[:blank:]].*]=] } }
-        }
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = {
+        { name = 'buffer' }
+      }
     })
 
     cmp.setup.cmdline(':', {
-        completion = { autocomplete = false },
-        sources = cmp.config.sources({
-            { name = 'path' }
-            }, {
-            { name = 'cmdline' }
-        })
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = cmp.config.sources({
+        { name = 'path' },
+        { name = 'buffer' }
+      }, {
+        {
+          name = 'cmdline',
+          option = {
+            ignore_cmds = { 'Man', '!' }
+          }
+        }
+      })
     })
   '';
 }

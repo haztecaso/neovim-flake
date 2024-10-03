@@ -15,7 +15,7 @@
     ./git/gitsigns.nix
     ./git/lazygit.nix
 
-    ./snippets/ultisnips.nix
+    ./snippets/luasnip.nix
 
     ./ui/lualine.nix
     ./ui/telescope.nix
