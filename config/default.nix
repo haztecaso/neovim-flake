@@ -9,7 +9,7 @@
     ./completion/cmp.nix
     ./completion/copilot.nix
 
-    ./languages/treesitter.nix
+    ./treesitter.nix
 
     # ./git/fugitive.nix
     ./git/gitsigns.nix
