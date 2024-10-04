@@ -30,9 +30,9 @@
     splitbelow = true;
     splitright = true;
 
-    backupdir = "$HOME/.local/share/nvim/backup/";
-    directory = "$HOME/.local/share/nvim/swap/";
-    undodir = "$HOME/.local/share/nvim/undo/";
+    backupdir.__raw = "vim.fs.normalize('~/.local/share/nvim/backup/')";
+    directory.__raw = "vim.fs.normalize('~/.local/share/nvim/swap/')";
+    undodir.__raw   = "vim.fs.normalize('~/.local/share/nvim/undo/')";
 
     undofile = true;
   };
