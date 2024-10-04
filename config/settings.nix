@@ -30,21 +30,16 @@
     splitbelow = true;
     splitright = true;
 
-    backupdir = "~/.local/share/nvim/backup/";
-    directory = "~/.local/share/nvim/swap/";
-    undodir = "~/.local/share/nvim/undo/";
+    backupdir = "$HOME/.local/share/nvim/backup/";
+    directory = "$HOME/.local/share/nvim/swap/";
+    undodir = "$HOME/.local/share/nvim/undo/";
+
     undofile = true;
   };
 
   extraConfigLua = ''
-    if vim.fn.isdirectory('~/.local/share/nvim/backup/') == 0 then
-      vim.cmd(':silent !mkdir -p ~/.local/share/nvim/backup')
-    end
-    if vim.fn.isdirectory('~/.local/share/nvim/swap/') == 0 then
-      vim.cmd(':silent !mkdir -p ~/.local/share/nvim/swap')
-    end
-    if vim.fn.isdirectory('~/.local/share/nvim/undo/') == 0 then
-      vim.cmd(':silent !mkdir -p ~/.local/share/nvim/undo')
-    end
+    vim.cmd(':silent !mkdir -p $HOME/.local/share/nvim/backup')
+    vim.cmd(':silent !mkdir -p $HOME/.local/share/nvim/swap')
+    vim.cmd(':silent !mkdir -p $HOME/.local/share/nvim/undo')
   '';
 }
