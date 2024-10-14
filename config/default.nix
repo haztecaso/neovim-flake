@@ -1,7 +1,7 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   imports = [
     ./settings.nix
-    ./keymaps.nix
 
     ./colorschemes/gruvbox.nix
 
