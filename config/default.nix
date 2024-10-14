@@ -10,9 +10,9 @@
     ./completion/schemastore.nix
 
     ./treesitter.nix
-    ./lsp.nix
-    ./conform.nix
-    ./fidget.nix
+    ./lsp/lsp.nix
+    ./lsp/conform.nix
+    ./lsp/fidget.nix
 
     # ./git/fugitive.nix
     ./git/gitsigns.nix
