@@ -15,5 +15,12 @@
     gitsigns.enable = true;
   };
 
+  colorschemes.gruvbox = {
+    enable = true;
+    settings = {
+      contrast = "hard";
+    };
+  };
+
   extraPlugins = with pkgs.vimPlugins; [ vim-eunuch vim-visual-multi ];
 }
