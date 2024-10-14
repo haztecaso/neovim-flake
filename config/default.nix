@@ -25,16 +25,19 @@
 
     ./utils/ack.nix
     ./utils/vinegar.nix
+    ./utils/undotree.nix
   ];
 
   clipboard.providers.xsel.enable = true;
 
   plugins = {
-    which-key.enable = true;
     commentary.enable = true;
     lastplace.enable = true;
     nix.enable = true;
+    nvim-autopairs.enable = true;
+    nvim-colorizer.enable = true;
     repeat.enable = true;
+    which-key.enable = true;
   };
 
   extraPlugins = with pkgs.vimPlugins; [
