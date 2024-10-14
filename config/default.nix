@@ -11,6 +11,8 @@
 
     ./treesitter.nix
     ./lsp.nix
+    ./conform.nix
+    ./fidget.nix
 
     # ./git/fugitive.nix
     ./git/gitsigns.nix
