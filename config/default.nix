@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   imports = [
     ./settings.nix
     ./keymaps.nix
@@ -8,6 +7,7 @@
 
     ./completion/cmp.nix
     ./completion/copilot.nix
+    ./completion/schemastore.nix
 
     ./treesitter.nix
     ./lsp.nix
@@ -26,6 +26,7 @@
     ./utils/ack.nix
     ./utils/vinegar.nix
     ./utils/undotree.nix
+    ./utils/nvterm.nix
   ];
 
   clipboard.providers.xsel.enable = true;
@@ -40,8 +41,5 @@
     which-key.enable = true;
   };
 
-  extraPlugins = with pkgs.vimPlugins; [
-    vim-eunuch
-    vim-visual-multi
-  ];
+  extraPlugins = with pkgs.vimPlugins; [ vim-eunuch vim-visual-multi ];
 }
