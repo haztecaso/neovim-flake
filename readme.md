@@ -57,4 +57,6 @@ environment.systemPackages = [
 
 ## Reference
 
-This configuration takes heavy inspiration from [redyf/Neve](https://github.com/redyf/Neve/tree/main).
+- This configuration takes heavy inspiration from [redyf/Neve](https://github.com/redyf/Neve/tree/main).
+- [niksingh710/nvix](https://github.com/niksingh710/nvix/tree/master) inspired
+  me in the division of packages.
