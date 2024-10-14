@@ -12,19 +12,26 @@
       perSystem = { pkgs, system, ... }:
         let
           nixvimLib = nixvim.lib.${system};
-          nixvim' = nixvim.legacyPackages.${system};
-          nixvimModule = {
+          nvimPackage = imports: nixvim.legacyPackages.${system}.makeNixvimWithModule {
             inherit pkgs;
-            module = import ./config;
+            module = {
+              imports = builtins.map (input: ./config/${input}) imports;
+            };
           };
-          nvim = nixvim'.makeNixvimWithModule nixvimModule;
-        in {
-          checks = {
-            default =
-              nixvimLib.check.mkTestDerivationFromNixvimModule nixvimModule;
+        in
+        {
+          packages = {
+            default = nvimPackage [ "settings.nix" "core" ];
+            core = nvimPackage [ "settings.nix" "core" ];
+            full = nvimPackage [ "settings.nix" "core" "full" ];
           };
 
-          packages = { default = nvim; };
+          checks = {
+            default = nixvimLib.check.mkTestDerivationFromNixvimModule nvimPackage [ "settings.nix" "core" "full" ];
+            core = nixvimLib.check.mkTestDerivationFromNixvimModule nvimPackage [ "settings.nix" "core" ];
+            full = nixvimLib.check.mkTestDerivationFromNixvimModule nvimPackage [ "settings.nix" "core" "full" ];
+          };
+
           formatter = pkgs.nixfmt-rfc-style;
         };
     };
