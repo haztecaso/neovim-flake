@@ -10,6 +10,7 @@
     ./completion/copilot.nix
 
     ./treesitter.nix
+    ./lsp.nix
 
     # ./git/fugitive.nix
     ./git/gitsigns.nix
