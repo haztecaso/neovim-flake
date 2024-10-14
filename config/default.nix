@@ -14,6 +14,8 @@
     ./lsp/conform.nix
     ./lsp/fidget.nix
 
+    ./chatgpt.nix
+
     # ./git/fugitive.nix
     ./git/gitsigns.nix
     ./git/lazygit.nix
