@@ -10,9 +10,10 @@
     ./completion/schemastore.nix
 
     ./treesitter.nix
-    ./lsp/lsp.nix
     ./lsp/conform.nix
     ./lsp/fidget.nix
+    ./lsp/lsp.nix
+    ./lsp/lspsaga.nix
 
     ./chatgpt.nix
 
