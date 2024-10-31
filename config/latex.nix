@@ -5,7 +5,7 @@
       enable = true;
       texlivePackage = pkgs.texlive.combined.scheme-full;
       settings = {
-        quickfix_mode = 1;
+        quickfix_mode = 2;
         view_method = "zathura";
       };
     };
