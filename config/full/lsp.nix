@@ -25,10 +25,6 @@
             action = "type_definition";
             desc = "Type Definition";
           };
-          "<C-k>" = {
-            action = "signature_help";
-            desc = "Signature Help";
-          };
         };
         diagnostic = {
           "<leader>cd" = {
