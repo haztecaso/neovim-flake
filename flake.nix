@@ -29,6 +29,7 @@
             default = nvimPackage [ "settings.nix" "core" ];
             core = nvimPackage [ "settings.nix" "core" ];
             full = nvimPackage [ "settings.nix" "core" "full" ];
+            latex = nvimPackage [ "settings.nix" "core" "full" "latex.nix" ];
           };
 
           overlayAttrs = { nvim = { inherit (config.packages) core full; }; };
@@ -50,6 +51,13 @@
                 "settings.nix"
                 "core"
                 "full"
+              ];
+            latex =
+              nixvimLib.check.mkTestDerivationFromNixvimModule nvimPackage [
+                "settings.nix"
+                "core"
+                "full"
+                "latex.nix"
               ];
           };
 
