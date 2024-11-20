@@ -3,6 +3,10 @@
   extraConfigLua = ''
     local metals = require ('metals');
     local metals_config = vim.tbl_deep_extend("force", metals.bare_config(), {
+      settings = {
+        showImplicitArguments = true,
+        metalsBinaryPath = "${pkgs.metals}/bin/metals";
+      },
     })
 
     local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
