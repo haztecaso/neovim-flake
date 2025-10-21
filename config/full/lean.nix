@@ -1,6 +1,1 @@
-{
-  plugins.lean = {
-    enable = true;
-    leanPackage = null;
-  };
-}
+{ plugins.lean = { enable = true; }; }
