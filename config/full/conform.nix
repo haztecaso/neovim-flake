@@ -35,7 +35,7 @@
           stop_after_first = true;
         };
         java = [ "google-java-format" ];
-        python = [ "black" ];
+        python = [ "isort" "black" ];
         lua = [ "stylua" ];
         nix = [ "nixfmt" ];
         markdown = {
