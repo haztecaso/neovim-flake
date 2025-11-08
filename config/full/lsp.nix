@@ -67,10 +67,10 @@
         nixd.enable = true;
         phpactor.enable = true;
         pyright.enable = true;
-        prolog_ls = {
-          enable = true;
-          package = null; # TODO: find nix prolog lsp package
-        };
+        # prolog_ls = {
+        #   enable = true;
+        #   package = null; # TODO: find nix prolog lsp package
+        # };
         texlab.enable = true;
         ts_ls.enable = true;
         yamlls.enable = true;
