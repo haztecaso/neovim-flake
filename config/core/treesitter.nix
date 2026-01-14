@@ -1,9 +1,11 @@
-{
+{ pkgs, ... }: {
   plugins = {
     treesitter = {
       enable = true;
+      grammarPackages = pkgs.vimPlugins.nvim-treesitter.passthru.allGrammars;
       settings = {
-        # ensure_installed = "all";
+        auto_install = false;
+        ensure_installed = [ ];
         incremental_selection = {
           enable = true;
           keymaps = {
@@ -17,14 +19,31 @@
     };
     treesitter-textobjects = {
       enable = true;
-      select = {
-        enable = true;
-        keymaps = {
-          "af" = { query = "@function.outer"; desc = "select outer part of function"; };
-          "if" = { query = "@function.inner"; desc = "select inner part of function"; };
-          "ac" = { query = "@class.outer"; desc = "select outer part of class"; };
-          "ic" = { query = "@class.outer"; desc = "select outer part of class"; };
-          "s" = { query = "@scope"; desc = "select language scope"; };
+      settings = {
+        select = {
+          enable = true;
+          keymaps = {
+            "af" = {
+              query_group = "@function.outer";
+              desc = "select outer part of function";
+            };
+            "if" = {
+              query_group = "@function.inner";
+              desc = "select inner part of function";
+            };
+            "ac" = {
+              query_group = "@class.outer";
+              desc = "select outer part of class";
+            };
+            "ic" = {
+              query_group = "@class.outer";
+              desc = "select outer part of class";
+            };
+            "s" = {
+              query_group = "@scope";
+              desc = "select language scope";
+            };
+          };
         };
       };
     };
