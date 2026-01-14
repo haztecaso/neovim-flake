@@ -67,6 +67,10 @@
         nixd.enable = true;
         phpactor.enable = true;
         pyright.enable = true;
+        svelte = {
+          enable = true;
+          package = pkgs.nodePackages.svelte-language-server;
+        };
         # prolog_ls = {
         #   enable = true;
         #   package = null; # TODO: find nix prolog lsp package
@@ -79,13 +83,10 @@
     lsp-format.enable = true;
     efmls-configs = {
       enable = true;
-      setup = {
+      languages = {
         all.linter = [ "vale" "codespell" ];
-        lua.formatter = "lua_format";
         lua.linter = "luacheck";
-        nix.formatter = "nixfmt";
         nix.linter = "statix";
-        python.formatter = [ "black" "isort" ];
       };
     };
   };
