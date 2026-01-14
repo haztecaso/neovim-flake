@@ -14,11 +14,11 @@
         experimental.ghost_text = true;
         sources.__raw = ''
           cmp.config.sources({
-            { name = 'copilot' },
             { name = 'nvim_lsp' },
+            { name = 'copilot' },
             { name = 'path' },
             -- { name = 'luasnip' },
-            { name = 'cmdline' },
+            -- { name = 'cmdline' },
             { name = 'latex_symbols' },
             -- { name = 'buffer', option = { get_bufnrs = function() return vim.api.nvim_list_bufs() end }},
           })
