@@ -1,49 +1,27 @@
-{
+{ pkgs, ... }: {
+  extraPackages = with pkgs; [ nixfmt ];
   plugins.conform-nvim = {
     enable = true;
     settings = {
       notifyOnError = true;
-      formattersByFt = {
-        html = {
-          __unkeyed-1 = "prettierd";
-          __unkeyed-2 = "prettier";
-          stop_after_first = true;
-        };
-        css = {
-          __unkeyed-1 = "prettierd";
-          __unkeyed-2 = "prettier";
-          stop_after_first = true;
-        };
-        javascript = {
-          __unkeyed-1 = "prettierd";
-          __unkeyed-2 = "prettier";
-          stop_after_first = true;
-        };
-        javascriptreact = {
-          __unkeyed-1 = "prettierd";
-          __unkeyed-2 = "prettier";
-          stop_after_first = true;
-        };
-        typescript = {
-          __unkeyed-1 = "prettierd";
-          __unkeyed-2 = "prettier";
-          stop_after_first = true;
-        };
-        typescriptreact = {
-          __unkeyed-1 = "prettierd";
-          __unkeyed-2 = "prettier";
-          stop_after_first = true;
-        };
-        java = [ "google-java-format" ];
+      format_on_save = {
+        lsp_fallback = true;
+        timeout_ms = 500;
+      };
+      formatters_by_ft = {
         python = [ "isort" "black" ];
-        lua = [ "stylua" ];
         nix = [ "nixfmt" ];
-        markdown = {
-          __unkeyed-1 = "prettierd";
-          __unkeyed-2 = "prettier";
-          stop_after_first = true;
-        };
+        lua = [ "stylua" ];
         rust = [ "rustfmt" ];
+        java = [ "google-java-format" ];
+        javascript = [ "prettierd" "prettier" ];
+        typescript = [ "prettierd" "prettier" ];
+        javascriptreact = [ "prettierd" "prettier" ];
+        typescriptreact = [ "prettierd" "prettier" ];
+        html = [ "prettierd" "prettier" ];
+        css = [ "prettierd" "prettier" ];
+        svelte = [ "prettierd" "prettier" ];
+        markdown = [ "prettierd" "prettier" ];
       };
     };
   };
