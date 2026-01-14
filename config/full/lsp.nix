@@ -75,7 +75,6 @@
         #   enable = true;
         #   package = null; # TODO: find nix prolog lsp package
         # };
-        texlab.enable = true;
         ts_ls.enable = true;
         yamlls.enable = true;
       };

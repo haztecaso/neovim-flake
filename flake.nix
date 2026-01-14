@@ -27,7 +27,6 @@
             };
           coreModules = [ "settings.nix" "core" ];
           fullModules = coreModules ++ [ "full" ];
-          latexModules = fullModules ++ [ "latex.nix" ];
           startupCheckLua = pkgs.writeText "nvim-startup-check.lua" ''
             vim.schedule(function()
               local output = vim.api.nvim_exec2('messages', { output = true }).output or ""
@@ -44,7 +43,6 @@
           packages = {
             default = nvimPackage coreModules;
             full = nvimPackage fullModules;
-            latex = nvimPackage latexModules;
           };
 
           overlayAttrs = { nvim = { inherit (config.packages) core full; }; };
@@ -62,25 +60,22 @@
               inherit pkgs;
               module = mkModule fullModules;
             };
-            latex = nixvimLib.check.mkTestDerivationFromNixvimModule {
-              inherit pkgs;
-              module = mkModule latexModules;
-            };
-            startup =
-              pkgs.runCommand "nvim-full-startup-clean" { } ''
-                set -euo pipefail
-                export HOME=$PWD/home
-                export XDG_STATE_HOME=$HOME/.local/state
-                export XDG_CACHE_HOME=$HOME/.cache
-                export XDG_DATA_HOME=$HOME/.local/share
-                export XDG_RUNTIME_DIR=$HOME/.local/run
-                mkdir -p "$XDG_STATE_HOME" "$XDG_CACHE_HOME" "$XDG_DATA_HOME" "$XDG_RUNTIME_DIR"
-                ${nvimPackage fullModules}/bin/nvim --headless "+luafile ${startupCheckLua}"
-                touch $out
-              '';
+            startup = pkgs.runCommand "nvim-full-startup-clean" { } ''
+              set -euo pipefail
+              export HOME=$PWD/home
+              export XDG_STATE_HOME=$HOME/.local/state
+              export XDG_CACHE_HOME=$HOME/.cache
+              export XDG_DATA_HOME=$HOME/.local/share
+              export XDG_RUNTIME_DIR=$HOME/.local/run
+              mkdir -p "$XDG_STATE_HOME" "$XDG_CACHE_HOME" "$XDG_DATA_HOME" "$XDG_RUNTIME_DIR"
+              ${
+                nvimPackage fullModules
+              }/bin/nvim --headless "+luafile ${startupCheckLua}"
+              touch $out
+            '';
           };
 
-          formatter = pkgs.nixfmt-rfc-style;
+          formatter = pkgs.nixfmt;
         };
     };
 }

@@ -1,8 +1,8 @@
 { pkgs, ... }: {
   plugins = {
-    lsp.servers.texlab.enable = true;
+    lsp.servers.texlab.enable = false;
     vimtex = {
-      enable = true;
+      enable = false;
       texlivePackage = pkgs.texlive.combined.scheme-full;
       settings = {
         quickfix_mode = 2;
