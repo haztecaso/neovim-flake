@@ -4,7 +4,7 @@
     cmp-buffer.enable = true;
     copilot-cmp.enable = true;
     cmp-path.enable = true;
-    cmp_luasnip.enable = true;
+    cmp_luasnip.enable = false;
     cmp-cmdline.enable = true;
     cmp-latex-symbols.enable = true;
     cmp = {
@@ -14,18 +14,16 @@
         experimental.ghost_text = true;
         sources.__raw = ''
           cmp.config.sources({
-            { name = 'nvim_lsp' },
             { name = 'copilot' },
+            { name = 'nvim_lsp' },
             { name = 'path' },
-            { name = 'luasnip' },
+            -- { name = 'luasnip' },
             { name = 'cmdline' },
             { name = 'latex_symbols' },
-            { name = 'buffer', option = {
-              get_bufnrs = function() return vim.api.nvim_list_bufs() end 
-            }},
+            -- { name = 'buffer', option = { get_bufnrs = function() return vim.api.nvim_list_bufs() end }},
           })
         '';
-        snippet.expand = "function(args) require('luasnip').lsp_expand(args.body) end";
+        # snippet.expand = "function(args) require('luasnip').lsp_expand(args.body) end";
         mapping.__raw = ''
           cmp.mapping.preset.insert({
                 ['<C-j>'] = cmp.mapping.select_next_item(),
@@ -45,13 +43,13 @@
 
                 ['<CR>'] = cmp.mapping(function(fallback)
                       if cmp.visible() then
-                          if luasnip.expandable() then
-                              luasnip.expand()
-                          else
+                       -- if luasnip.expandable() then
+                       --     luasnip.expand()
+                       -- else
                               cmp.confirm({
                                   select = true,
                               })
-                          end
+                       -- end
                       else
                           fallback()
                       end
@@ -60,8 +58,8 @@
                 ["<Tab>"] = cmp.mapping(function(fallback)
                   if cmp.visible() then
                     cmp.select_next_item()
-                  elseif luasnip.locally_jumpable(1) then
-                    luasnip.jump(1)
+                  -- elseif luasnip.locally_jumpable(1) then
+                  --   luasnip.jump(1)
                   else
                     fallback()
                   end
@@ -70,8 +68,8 @@
                 ["<S-Tab>"] = cmp.mapping(function(fallback)
                   if cmp.visible() then
                     cmp.select_prev_item()
-                  elseif luasnip.locally_jumpable(-1) then
-                    luasnip.jump(-1)
+                  -- elseif luasnip.locally_jumpable(-1) then
+                  --   luasnip.jump(-1)
                   else
                     fallback()
                   end
@@ -83,8 +81,6 @@
   };
   extraConfigLuaPre = ''
     local cmp = require 'cmp'
-    luasnip = require("luasnip")
-
 
     cmp.setup.cmdline('/', {
       mapping = cmp.mapping.preset.cmdline(),
