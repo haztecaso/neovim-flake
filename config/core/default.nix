@@ -3,7 +3,7 @@
     map (fn: ./${fn})
     (filter (fn: fn != "default.nix") (attrNames (readDir ./.)));
   clipboard.providers.xsel.enable = true;
-
+  extraPackages = [ pkgs.stdenv.cc ];
   plugins = {
     commentary.enable = true;
     lastplace.enable = true;
