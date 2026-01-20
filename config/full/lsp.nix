@@ -81,6 +81,7 @@
         #   enable = true;
         #   package = null; # TODO: find nix prolog lsp package
         # };
+        tinymist.enable = true;
         ts_ls.enable = true;
         yamlls.enable = true;
       };
