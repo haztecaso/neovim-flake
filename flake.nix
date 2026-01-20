@@ -57,7 +57,8 @@
         {
           packages = {
             default = nvimPackage coreModules;
-            full = nvimPackage fullModules;
+            nvim-core = nvimPackage coreModules;
+            nvim-full = nvimPackage fullModules;
           };
 
           overlayAttrs = {
