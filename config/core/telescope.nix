@@ -1,33 +1,36 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   plugins.web-devicons.enable = true;
   plugins.telescope = {
     enable = true;
     keymaps = {
-      "<M-f>" = { 
-        action = "live_grep"; 
+      "<M-f>" = {
+        action = "live_grep";
         options.desc = "live grep files";
       };
-      "<C-b>" = { 
-        action = "buffers"; 
+      "<C-b>" = {
+        action = "buffers";
         options.desc = "buffers";
       };
-      "<C-p>" = { 
-        action = "git_files"; 
+      "<C-p>" = {
+        action = "git_files";
         options.desc = "find files in current git repository";
       };
-      "<M-p>" = { 
-        action = "find_files"; 
+      "<M-p>" = {
+        action = "find_files";
         options.desc = "find files";
       };
-      "<M-r>" = { 
-        action = "command_history"; 
+      "<M-r>" = {
+        action = "command_history";
         options.desc = "command history";
       };
-      "<C-e>" = { 
-        action = "diagnostics"; 
+      "<C-e>" = {
+        action = "diagnostics";
         options.desc = "diagnostics";
       };
-      "<leader>fh" = { action = "help_tags"; };
+      "<leader>fh" = {
+        action = "help_tags";
+      };
     };
     settings.defaults = {
       mappings.i = {

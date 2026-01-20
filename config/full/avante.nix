@@ -6,7 +6,9 @@
       providers.claude = {
         model = "claude-3-7-latest";
       };
-      behaviour = { auto_suggestions = false; };
+      behaviour = {
+        auto_suggestions = false;
+      };
     };
   };
 }

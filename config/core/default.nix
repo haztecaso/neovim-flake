@@ -1,7 +1,8 @@
-{ pkgs, ... }: {
-  imports = with builtins;
-    map (fn: ./${fn})
-    (filter (fn: fn != "default.nix") (attrNames (readDir ./.)));
+{ pkgs, ... }:
+{
+  imports =
+    with builtins;
+    map (fn: ./${fn}) (filter (fn: fn != "default.nix") (attrNames (readDir ./.)));
   clipboard.providers.xsel.enable = true;
   extraPackages = [ pkgs.stdenv.cc ];
   plugins = {
@@ -17,8 +18,13 @@
 
   colorschemes.gruvbox = {
     enable = true;
-    settings = { contrast = "hard"; };
+    settings = {
+      contrast = "hard";
+    };
   };
 
-  extraPlugins = with pkgs.vimPlugins; [ vim-eunuch vim-visual-multi ];
+  extraPlugins = with pkgs.vimPlugins; [
+    vim-eunuch
+    vim-visual-multi
+  ];
 }

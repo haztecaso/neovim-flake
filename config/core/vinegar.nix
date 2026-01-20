@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   extraPlugins = [ pkgs.vimPlugins.vim-vinegar ];
   globals = {
     "netrw_liststyle" = 3;

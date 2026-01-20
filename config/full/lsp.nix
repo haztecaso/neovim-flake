@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   plugins = {
     lsp = {
       enable = true;
@@ -46,7 +47,12 @@
         bashls.enable = true;
         clangd = {
           enable = true;
-          filetypes = [ "c" "cpp" "objc" "objcpp" ];
+          filetypes = [
+            "c"
+            "cpp"
+            "objc"
+            "objcpp"
+          ];
         };
         cssls.enable = true;
         dockerls.enable = true;
@@ -83,7 +89,10 @@
     efmls-configs = {
       enable = true;
       languages = {
-        all.linter = [ "vale" "codespell" ];
+        all.linter = [
+          "vale"
+          "codespell"
+        ];
         lua.linter = "luacheck";
         nix.linter = "statix";
       };

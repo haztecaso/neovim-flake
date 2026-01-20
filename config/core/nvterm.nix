@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   extraPlugins = [ pkgs.vimPlugins.nvterm ];
   extraConfigLua = ''
     require("nvterm").setup({

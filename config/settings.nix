@@ -61,10 +61,22 @@
   globals.mapleader = ",";
 
   keymaps = [
-    { key = "<C-j>"; action = "<C-W>j"; }
-    { key = "<C-k>"; action = "<C-W>k"; }
-    { key = "<C-h>"; action = "<C-W>h"; }
-    { key = "<C-l>"; action = "<C-W>l"; }
+    {
+      key = "<C-j>";
+      action = "<C-W>j";
+    }
+    {
+      key = "<C-k>";
+      action = "<C-W>k";
+    }
+    {
+      key = "<C-h>";
+      action = "<C-W>h";
+    }
+    {
+      key = "<C-l>";
+      action = "<C-W>l";
+    }
     {
       key = "<leader>o";
       action = "<C-W>\\|<C-W>_";

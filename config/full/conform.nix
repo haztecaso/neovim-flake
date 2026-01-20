@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   extraPackages = with pkgs; [ nixfmt ];
   plugins.conform-nvim = {
     enable = true;
@@ -9,19 +10,46 @@
         timeout_ms = 500;
       };
       formatters_by_ft = {
-        python = [ "isort" "black" ];
+        python = [
+          "isort"
+          "black"
+        ];
         nix = [ "nixfmt" ];
         lua = [ "stylua" ];
         rust = [ "rustfmt" ];
         java = [ "google-java-format" ];
-        javascript = [ "prettierd" "prettier" ];
-        typescript = [ "prettierd" "prettier" ];
-        javascriptreact = [ "prettierd" "prettier" ];
-        typescriptreact = [ "prettierd" "prettier" ];
-        html = [ "prettierd" "prettier" ];
-        css = [ "prettierd" "prettier" ];
-        svelte = [ "prettierd" "prettier" ];
-        markdown = [ "prettierd" "prettier" ];
+        javascript = [
+          "prettierd"
+          "prettier"
+        ];
+        typescript = [
+          "prettierd"
+          "prettier"
+        ];
+        javascriptreact = [
+          "prettierd"
+          "prettier"
+        ];
+        typescriptreact = [
+          "prettierd"
+          "prettier"
+        ];
+        html = [
+          "prettierd"
+          "prettier"
+        ];
+        css = [
+          "prettierd"
+          "prettier"
+        ];
+        svelte = [
+          "prettierd"
+          "prettier"
+        ];
+        markdown = [
+          "prettierd"
+          "prettier"
+        ];
       };
     };
   };

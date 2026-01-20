@@ -8,24 +8,38 @@
     };
   };
 
-  outputs = { nixvim, flake-parts, ... }@inputs:
+  outputs =
+    { nixvim, flake-parts, ... }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [ "x86_64-linux" "aarch64-linux" ];
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
 
       imports = [ inputs.flake-parts.flakeModules.easyOverlay ];
 
-      perSystem = { config, pkgs, system, ... }:
+      perSystem =
+        {
+          config,
+          pkgs,
+          system,
+          ...
+        }:
         let
           nixvimLib = nixvim.lib.${system};
           mkModule = imports: {
-            imports = builtins.map (input: ./config/${input}) imports;
+            imports = map (input: ./config/${input}) imports;
           };
-          nvimPackage = imports:
+          nvimPackage =
+            imports:
             nixvim.legacyPackages.${system}.makeNixvimWithModule {
               inherit pkgs;
               module = mkModule imports;
             };
-          coreModules = [ "settings.nix" "core" ];
+          coreModules = [
+            "settings.nix"
+            "core"
+          ];
           fullModules = coreModules ++ [ "full" ];
           startupCheckLua = pkgs.writeText "nvim-startup-check.lua" ''
             vim.schedule(function()
@@ -39,13 +53,16 @@
               end
             end)
           '';
-        in {
+        in
+        {
           packages = {
             default = nvimPackage coreModules;
             full = nvimPackage fullModules;
           };
 
-          overlayAttrs = { nvim = { inherit (config.packages) core full; }; };
+          overlayAttrs = {
+            nvim = { inherit (config.packages) core full; };
+          };
 
           checks = {
             default = nixvimLib.check.mkTestDerivationFromNixvimModule {
@@ -68,9 +85,7 @@
               export XDG_DATA_HOME=$HOME/.local/share
               export XDG_RUNTIME_DIR=$HOME/.local/run
               mkdir -p "$XDG_STATE_HOME" "$XDG_CACHE_HOME" "$XDG_DATA_HOME" "$XDG_RUNTIME_DIR"
-              ${
-                nvimPackage fullModules
-              }/bin/nvim --headless "+luafile ${startupCheckLua}"
+              ${nvimPackage fullModules}/bin/nvim --headless "+luafile ${startupCheckLua}"
               touch $out
             '';
           };

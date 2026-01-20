@@ -34,13 +34,19 @@ in
       options.desc = "Edit with instructions";
     }
     {
-      mode = [ "v" "n" ];
+      mode = [
+        "v"
+        "n"
+      ];
       key = "<leader>C";
       action = "<cmd>ChatGPT<cr>";
       options.desc = "ChatGPT";
     }
     {
-      mode = [ "v" "n" ];
+      mode = [
+        "v"
+        "n"
+      ];
       key = "<leader>cd";
       action = "<cmd>ChatGPTRun docstring<cr>";
       options.desc = "ChatGPT docstring";

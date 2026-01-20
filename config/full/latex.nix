@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   plugins = {
     lsp.servers.texlab.enable = false;
     vimtex = {

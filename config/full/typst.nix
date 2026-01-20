@@ -1,1 +1,5 @@
-{ plugins.typst-preview = { enable = true; }; }
+{
+  plugins.typst-preview = {
+    enable = true;
+  };
+}

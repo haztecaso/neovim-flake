@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   extraPlugins = [ pkgs.vimPlugins.nvim-metals ];
   extraConfigLua = ''
     local metals = require ('metals');

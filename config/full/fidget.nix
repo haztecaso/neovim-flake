@@ -4,8 +4,7 @@
     settings = {
       logger = {
         level = "warn"; # "off", "error", "warn", "info", "debug", "trace"
-        float_precision =
-          1.0e-2; # Limit the number of decimals displayed for floats
+        float_precision = 1.0e-2; # Limit the number of decimals displayed for floats
       };
       notification = {
         poll_rate = 10; # How frequently to update and render notifications
@@ -48,8 +47,7 @@
         poll_rate = 0; # How and when to poll for progress messages
         suppress_on_insert = true; # Suppress new messages while in insert mode
         ignore_done_already = false; # Ignore new tasks that are already complete
-        ignore_empty_message =
-          false; # Ignore new tasks that don't contain a message
+        ignore_empty_message = false; # Ignore new tasks that don't contain a message
         clear_on_detach =
           # Clear notification group when LSP server detaches
           ''
@@ -65,8 +63,7 @@
           '';
         ignore = [ ]; # List of LSP servers to ignore
         lsp = {
-          progress_ringbuf_size =
-            0; # Configure the nvim's LSP progress ring buffer size
+          progress_ringbuf_size = 0; # Configure the nvim's LSP progress ring buffer size
         };
         display = {
           render_limit = 16; # How many LSP messages to show at once
@@ -78,14 +75,11 @@
             pattern = "dots";
             period = 1;
           }; # Icon shown when LSP progress tasks are in progress
-          progress_style =
-            "WarningMsg"; # Highlight group for in-progress LSP tasks
-          group_style =
-            "Title"; # Highlight group for group name (LSP server name)
+          progress_style = "WarningMsg"; # Highlight group for in-progress LSP tasks
+          group_style = "Title"; # Highlight group for group name (LSP server name)
           icon_style = "Question"; # Highlight group for group icons
           priority = 30; # Ordering priority for LSP notification group
-          skip_history =
-            true; # Whether progress notifications should be omitted from history
+          skip_history = true; # Whether progress notifications should be omitted from history
           format_message = ''
             require ("fidget.progress.display").default_format_message
           ''; # How to format a progress message
@@ -96,7 +90,9 @@
             function (group) return tostring (group) end
           ''; # How to format a progress notification group's name
           overrides = {
-            rust_analyzer = { name = "rust-analyzer"; };
+            rust_analyzer = {
+              name = "rust-analyzer";
+            };
           }; # Override options from the default notification config
         };
       };
