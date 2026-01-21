@@ -1,19 +1,4 @@
 {
-  plugins.lsp-lines.enable = true;
-
-  diagnostic.settings = {
-    virtual_text = false; # Disable virtual_text since lsp-lines replaces it
-    virtual_lines = true; # Enable lsp-lines display
-    signs = true;
-    underline = true;
-    update_in_insert = false;
-    severity_sort = true;
-    float = {
-      border = "rounded";
-      source = true;
-    };
-  };
-
   opts = {
     number = true;
     textwidth = 80;

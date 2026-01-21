@@ -1,8 +1,12 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   imports =
     with builtins;
-    map (fn: ./${fn}) (filter (fn: fn != "default.nix") (attrNames (readDir ./.)));
+    let
+      files = attrNames (readDir ./.);
+      nixFiles = filter (fn: fn != "default.nix" && lib.hasSuffix ".nix" fn) files;
+    in
+    map (fn: ./${fn}) nixFiles;
   clipboard.providers.xsel.enable = true;
   extraPackages = [ pkgs.stdenv.cc ];
   plugins = {
