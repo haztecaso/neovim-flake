@@ -1,5 +1,50 @@
 { pkgs, ... }:
 {
+  project.toggles.diagnostics = {
+    key = "<leader>td";
+    desc = "Diagnostic mode (full/compact/off)";
+    modes = [ "full" "compact" "off" ];
+    labels = {
+      full = "full (lsp-lines)";
+      compact = "compact (virtual_text)";
+      off = "off";
+    };
+    default = "full";
+    apply = ''
+      function(mode)
+        if mode == "compact" then
+          vim.diagnostic.enable(true)
+          vim.diagnostic.config({ virtual_lines = false, virtual_text = { prefix = "●", spacing = 2 } })
+        elseif mode == "off" then
+          vim.diagnostic.enable(false)
+        else
+          vim.diagnostic.enable(true)
+          vim.diagnostic.config({ virtual_lines = true, virtual_text = false })
+        end
+      end
+    '';
+  };
+
+  project.toggles.errors_only = {
+    key = "<leader>te";
+    desc = "Errors only";
+    default = "false";
+    apply = ''
+      function(enabled)
+        if enabled then
+          local severity = { min = vim.diagnostic.severity.ERROR }
+          vim.diagnostic.config({
+            virtual_lines = { severity = severity },
+            virtual_text = { severity = severity, prefix = "●" },
+          })
+        else
+          local state = Project.load_state()
+          Project.apply_toggle("diagnostics", state.diagnostics or "full")
+        end
+      end
+    '';
+  };
+
   plugins = {
     lsp = {
       enable = true;
@@ -58,7 +103,6 @@
         dockerls.enable = true;
         html.enable = true;
         jsonls.enable = true;
-        # leanls.enable = true; #TODO: configure with lean plugin?
         lua_ls = {
           enable = true;
           settings = {
@@ -77,10 +121,6 @@
           enable = true;
           package = pkgs.nodePackages.svelte-language-server;
         };
-        # prolog_ls = {
-        #   enable = true;
-        #   package = null; # TODO: find nix prolog lsp package
-        # };
         tinymist.enable = true;
         ts_ls.enable = true;
         yamlls.enable = true;
