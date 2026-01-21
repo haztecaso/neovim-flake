@@ -90,10 +90,7 @@
     efmls-configs = {
       enable = true;
       languages = {
-        all.linter = [
-          "vale"
-          "codespell"
-        ];
+        all.linter = [ "vale" ];
         lua.linter = "luacheck";
         nix.linter = "statix";
       };
