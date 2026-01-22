@@ -1,14 +1,30 @@
 { pkgs, ... }:
 {
   extraPackages = with pkgs; [ nixfmt ];
+
+  project.toggles.format_on_save = {
+    key = "<leader>tf";
+    desc = "Format on Save";
+    default = "true";
+    apply = ''
+      function(enabled)
+        vim.g.format_on_save_enabled = enabled
+      end
+    '';
+  };
+
   plugins.conform-nvim = {
     enable = true;
     settings = {
       notifyOnError = true;
-      format_on_save = {
-        lsp_fallback = true;
-        timeout_ms = 500;
-      };
+      format_on_save.__raw = ''
+        function(bufnr)
+          if vim.g.format_on_save_enabled == false then
+            return false
+          end
+          return { lsp_fallback = true, timeout_ms = 500 }
+        end
+      '';
       formatters_by_ft = {
         python = [
           "isort"
@@ -55,15 +71,6 @@
   };
 
   keymaps = [
-    {
-      mode = "n";
-      key = "<leader>uf";
-      action = ":FormatToggle<CR>";
-      options = {
-        desc = "Toggle Format";
-        silent = true;
-      };
-    }
     {
       mode = "n";
       key = "<leader>cf";
