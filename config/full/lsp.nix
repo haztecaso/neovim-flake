@@ -119,7 +119,7 @@
         pyright.enable = true;
         svelte = {
           enable = true;
-          package = pkgs.nodePackages.svelte-language-server;
+          package = pkgs.svelte-language-server;
         };
         tinymist.enable = true;
         ts_ls.enable = true;
