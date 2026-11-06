@@ -58,10 +58,11 @@ function Theme.apply()
   end
 end
 
+-- Short debounce: one theme switch touches several files in the state dir.
 local timer = vim.uv.new_timer()
 local function schedule_apply()
   timer:stop()
-  timer:start(100, 0, vim.schedule_wrap(Theme.apply))
+  timer:start(30, 0, vim.schedule_wrap(Theme.apply))
 end
 
 local function watch_state()
@@ -87,7 +88,9 @@ local function watch_portal()
   }, {
     on_stdout = function(_, lines)
       for _, l in ipairs(lines) do
-        if l:find("color-scheme", 1, true) then
+        -- With a palette the state-dir watcher already covers switches;
+        -- reacting here too would apply every switch twice.
+        if l:find("color-scheme", 1, true) and vim.fn.filereadable(palette_path) == 0 then
           schedule_apply()
           return
         end
