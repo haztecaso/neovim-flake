@@ -9,7 +9,7 @@
   };
 
   outputs =
-    { nixvim, flake-parts, ... }@inputs:
+    { nixvim, flake-parts, nixpkgs, ... }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [
         "x86_64-linux"
@@ -23,6 +23,7 @@
           config,
           pkgs,
           system,
+          lib,
           ...
         }:
         let
@@ -55,6 +56,11 @@
           '';
         in
         {
+          _module.args.pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "copilot-language-server" ];
+          };
+
           packages = {
             default = nvimPackage coreModules;
             nvim-core = nvimPackage coreModules;
